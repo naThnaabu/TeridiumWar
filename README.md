@@ -136,6 +136,7 @@ Code:
           -> Attribute anpassen
 
 Gegner attackiert
+```javascript
 -> Attacke
    -> Würfel 20 wird im Hintergrund geworfen
       -> Wenn Wert <= Angriffswert dann Erfolg
@@ -150,3 +151,7 @@ Gegner attackiert
                -> Gegner verliert Zauberdmg
 
 Runde II
+.
+.
+.
+```

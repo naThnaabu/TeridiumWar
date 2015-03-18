@@ -18,8 +18,10 @@
    |__________________________________________________________|
                    | ./\/\ /            \ /\/\. |
                    |/     V              V     \|
-                   "                          "
+                   "                            "
 ```
+
+SOON translated to english...
 
 Einleitung
 Da ich ziemlich neu in der Programmierung bin, habe ich mit einem Textbasiertem RPG mit dem Namen Teridium War angefangen.

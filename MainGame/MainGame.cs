@@ -41,7 +41,7 @@ namespace TeridiumRPG
         Druid druid;
         Prist prist;
 
-        DataHandler datahandler;
+        HeroDataHandler datahandler;
         #endregion
 
         public MainGame()
@@ -78,7 +78,7 @@ namespace TeridiumRPG
             #endregion
 
             #region Creations
-            datahandler = new DataHandler();
+            datahandler = new HeroDataHandler();
 
             #region Monster creation
             troll = new Troll();
@@ -157,7 +157,7 @@ namespace TeridiumRPG
 
             #region The Game
 
-            datahandler.Load(myhero);
+            myhero = datahandler.Load();
             RPGStart();
             do
             {
@@ -167,7 +167,7 @@ namespace TeridiumRPG
             }
             while (banotherround == true);
             //Choose one monster from the list and start the Battle Class
-            datahandler.Save(myhero, "n");
+            datahandler.Save(myhero, false);
             #endregion
         }
 
@@ -228,7 +228,7 @@ namespace TeridiumRPG
 
                 case "s":
                 case "S":
-                    datahandler.Save(hero, "n");
+				datahandler.Save(hero, false);
                     banotherround = true;
                     break;
 
@@ -548,8 +548,8 @@ Nr.         Name                 Own          Armor      Place
 ");
             #endregion
             }
-            DataHandler datahandler = new DataHandler();
-            datahandler.Save(hero, "y");
+            HeroDataHandler datahandler = new HeroDataHandler();
+            datahandler.Save(hero, true);
             int i = 0;
 
             #region Write Items

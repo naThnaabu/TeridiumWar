@@ -10,7 +10,7 @@ namespace TeridiumRPG
     {
         #region Variables
         int round = 1;
-        DataHandler datahandler;
+        HeroDataHandler datahandler;
         #endregion
 
         #region The Battle
@@ -223,7 +223,7 @@ Type in what you want to do:
                         }
                         else
                         {
-                            DataHandler datahandler = new DataHandler();
+                            HeroDataHandler datahandler = new HeroDataHandler();
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("You have killed the " + monster.Identifier + "!");
                             hero.Experience += monster.Experience;
@@ -235,7 +235,7 @@ Type in what you want to do:
                             Console.ReadKey();
                             Console.ForegroundColor = ConsoleColor.Gray;
                             Console.Clear();
-                            datahandler.Save(hero, "n");
+							datahandler.Save(hero, false);
                         }
                     }
                 }

@@ -8,68 +8,70 @@ namespace TeridiumRPG
     class Hero : Character
     {
         #region Variables
-        public string weapon;
-        public string helmetname;
-        public string chestname;
-        public string armname;
-        public string legname;
-        public string shouename;
+		public string weapon { get; set; }
+		public string helmetname { get; set; }
+		public string chestname { get; set; }
+		public string armname { get; set; }
+		public string legname { get; set; }
+		public string shouename { get; set; }
 
-        public int helmet;
-        public int chest;
-        public int arm;
-        public int leg;
-        public int shoue;
-        public int ArmorValue;
-        public int AnzW6;
-        public int Level;
-        public int CurrentInv;
-        public int MaxInv;
+		public int helmet { get; set; }
+		public int chest { get; set; }
+		public int arm { get; set; }
+		public int leg { get; set; }
+		public int shoue { get; set; }
+		public int ArmorValue { get; set; }
+		public int AnzW6 { get; set; }
+		public int Level { get; set; }
+		public int CurrentInv { get; set; }
+		public int MaxInv { get; set; }
 
-        public List<string> Inventar = new List<string>();
-        public List<string> WeaponInventar = new List<string>();
-        public List<string> ArmorInventar = new List<string>();
+		public List<string> Inventar { get; set; }
+		public List<string> WeaponInventar { get; set; }
+		public List<string> ArmorInventar { get; set; }
         #endregion
 
         public Hero()
         {
-
+			Inventar = new List<string>();
+			WeaponInventar = new List<string>();
+			ArmorInventar = new List<string>();
         }
 
         #region functions
-        public void Initialize(Hero hero)
+        public void Initialize()
         {
-            hero.CurrentHealth = 18;
-            hero.MaxHealth = 18;
-            hero.CurrentMagic = 30;
-            hero.MaxMagic = 30;
-            hero.Attack = 9;
-            hero.Defense = 8;
-            hero.Experience = 0;
-            hero.Gold = 25;
-            hero.isAlive = true;
-            hero.AttackDamage = 1;
-            hero.AnzW6 = 1;
-            hero.weapon = "Sword";
-            hero.arm = 0;
-            hero.armname = "Nothing";
-            hero.chest = 0;
-            hero.chestname = "Shirt";
-            hero.leg = 0;
-            hero.legname = "Woolen trouser";
-            hero.helmet = 0;
-            hero.helmetname = "Nothing";
-            hero.shouename = "Cheap leather shoes";
-            hero.shoue = 0;
-            hero.AnzBigHPPotions = 0;
-            hero.AnzLittleHPPotions = 1;
-            hero.AnzMiddleHPPotions = 0;
-            hero.AnzBigMPPotions = 0;
-            hero.AnzLittleMPPotions = 0;
-            hero.AnzMiddleMPPotions = 0;
-            hero.Level = 1;
-            hero.CurrentInv = 15;
-            hero.MaxInv = 15;
+            CurrentHealth = 18;
+            MaxHealth = 18;
+            CurrentMagic = 30;
+            MaxMagic = 30;
+            Attack = 9;
+            Defense = 8;
+            Experience = 0;
+            Gold = 25;
+            isAlive = true;
+            AttackDamage = 1;
+            AnzW6 = 1;
+            weapon = "Sword";
+            arm = 0;
+            armname = "Nothing";
+            chest = 0;
+            chestname = "Shirt";
+            leg = 0;
+            legname = "Woolen trouser";
+            helmet = 0;
+            helmetname = "Nothing";
+            shouename = "Cheap leather shoes";
+            shoue = 0;
+            AnzBigHPPotions = 0;
+            AnzLittleHPPotions = 1;
+            AnzMiddleHPPotions = 0;
+            AnzBigMPPotions = 0;
+            AnzLittleMPPotions = 0;
+            AnzMiddleMPPotions = 0;
+            Level = 1;
+            CurrentInv = 15;
+            MaxInv = 15;
         }
 
         public int CalculateArmorValue()

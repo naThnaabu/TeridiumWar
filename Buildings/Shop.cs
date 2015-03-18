@@ -1358,8 +1358,8 @@ What would you like to sell?
 Nr.                    Name                 Own       Price
 --------------------------------------------------------------
 ");
-            DataHandler datahandler = new DataHandler();
-            datahandler.Save(hero, "y");
+            HeroDataHandler datahandler = new HeroDataHandler();
+            datahandler.Save(hero, true);
             int i = 0;
             string[] aHero = list.ToArray();
             var counts = aHero

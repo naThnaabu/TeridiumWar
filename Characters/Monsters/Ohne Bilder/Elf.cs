@@ -20,9 +20,7 @@ namespace TeridiumRPG
             Identifier = "Elf";
             isAlive = true;
             AttackDamage = 7;
-            Print = (@"
-
-");
+            Print = (@"");
         }
     }
 }

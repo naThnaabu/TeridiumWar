@@ -1,6 +1,3 @@
-An Oldschool text RPG 
-Have fun and feel free to help
-Developed by Tehral
 
 ```javascript
   _____         _     _ _                   ____  ____   ____ 
@@ -15,14 +12,13 @@ Developed by Tehral
     _________________/_____\__\@  @/___/_____\________________ 
    |                          ¦\,,/¦                          |
    |                           \VV/                           |
-   |               Welcome to <<Teridium RPG>>                |
-   |                      (T)utorial                          |
-   |                      (P)lay                              |       
+   |                  An Oldschool text RPG                   |
+   |              Have fun and feel free to help              |
    |                   Developed by Tehral                    |
    |__________________________________________________________|
                    | ./\/\ /            \ /\/\. |
                    |/     V              V     \|
-                   ""                           ""
+                   "                          "
 ```
 
 Einleitung

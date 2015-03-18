@@ -2,8 +2,28 @@ An Oldschool text RPG
 Have fun and feel free to help
 Developed by Tehral
 
-
-Das Projekt Teridium War
+```javascript
+  _____         _     _ _                   ____  ____   ____ 
+ |_   _|__ _ __(_) __| (_)_   _ _ __ ___   |  _ \|  _ \ / ___|
+   | |/ _ \ '__| |/ _` | | | | | '_ ` _ \  | |_) | |_) | |  _ 
+   | |  __/ |  | | (_| | | |_| | | | | | | |  _ <|  __/| |_| |
+   |_|\___|_|  |_|\__,_|_|\__,_|_| |_| |_| |_| \_\_|    \____|
+                                    
+                        ^     \    /      ^                        
+                       / \    \\__//     / \                   
+                      /   \  ('\  /')   /   \                  
+    _________________/_____\__\@  @/___/_____\________________ 
+   |                          ¦\,,/¦                          |
+   |                           \VV/                           |
+   |               Welcome to <<Teridium RPG>>                |
+   |                      (T)utorial                          |
+   |                      (P)lay                              |       
+   |                   Developed by Tehral                    |
+   |__________________________________________________________|
+                   | ./\/\ /            \ /\/\. |
+                   |/     V              V     \|
+                   ""                           ""
+```
 
 Einleitung
 Da ich ziemlich neu in der Programmierung bin, habe ich mit einem Textbasiertem RPG mit dem Namen Teridium War angefangen.
@@ -116,8 +136,8 @@ Das Kampfsystem ist relativ simpel sobald man den dreh raus hat:
 Runde I
 Spieler greift zuerst an
 
-Code:
 
+```javascript
 -> Attacke
    -> Würfel 20 werfen
       -> Wenn Wert <= Angriffswert dann erfolg
@@ -136,7 +156,6 @@ Code:
           -> Attribute anpassen
 
 Gegner attackiert
-```javascript
 -> Attacke
    -> Würfel 20 wird im Hintergrund geworfen
       -> Wenn Wert <= Angriffswert dann Erfolg

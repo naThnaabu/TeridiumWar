@@ -1,4 +1,4 @@
-﻿<Properties>
+﻿<Properties StartupItem="Teridium War.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.Workbench ActiveDocument="MainGame\MainGame.cs">
     <Files>

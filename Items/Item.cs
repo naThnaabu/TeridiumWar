@@ -8,7 +8,8 @@ namespace TeridiumRPG
     public class Item
     {
 		public int ItemType { get; set; }
-		public string Identifier { get; set; }
+		public string Name { get; set; }
+		public string Category {get; set;}
 		public int Price { get; set; }
 		public int InvStaple { get; set; }
 		public int InvCanHave { get; set; }
@@ -21,6 +22,7 @@ namespace TeridiumRPG
 			string Identifier = "Nothing", 
 			int ItemType = ItemTypes.Nothing,
 			int Weight = 0,
+			string Category = "",
 			int Price = 0, 
 			int InvStaple = 0, 
 			int InvCanHave = 0,
@@ -38,6 +40,7 @@ namespace TeridiumRPG
 			this.AttackValue = AttackValue;
 			this.DefenseValue = DefenseValue;
 			this.Weight = Weight;
+			this.Category = Category;
 		}
     }
 }

@@ -109,6 +109,9 @@
     <Compile Include="Spells\WaterStrike.cs" />
     <Compile Include="Game\Game.cs" />
     <Compile Include="Items\ItemTypes.cs" />
+    <Compile Include="Game\Output.cs" />
+    <Compile Include="Shop\ShopCategories.cs" />
+    <Compile Include="Shop\Shop.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Pictures\rpg_icon_1.ico" />
@@ -325,5 +328,6 @@
     <Folder Include="GameData\" />
     <Folder Include="GameData\Shops\" />
     <Folder Include="GameData\Shops\default\" />
+    <Folder Include="Shop\" />
   </ItemGroup>
 </Project>

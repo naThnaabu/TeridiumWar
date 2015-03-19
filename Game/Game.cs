@@ -7,9 +7,10 @@ namespace TeridiumRPG
 {
 	public static class Game
 	{
-		static string PlayerDataDir;
-		static string CharacterDataRoot;
-		static string ItemDataRoot;
+		public static string PlayerDataDir;
+		public static string CharacterDataRoot;
+		public static string ItemDataRoot;
+		public static string GameData;
 		static Deserializer Deserializer;
 		static Game ()
 		{
@@ -17,6 +18,7 @@ namespace TeridiumRPG
 			PlayerDataDir = Environment.GetEnvironmentVariable("HOME")+"/.teridiumwar/PlayerData";
 			CharacterDataRoot = Environment.GetEnvironmentVariable("HOME")+"/.teridiumwar/CharacterData";
 			ItemDataRoot = Environment.GetEnvironmentVariable("HOME")+"/.teridiumwar/ItemData";
+			GameData = Environment.GetEnvironmentVariable("HOME")+"/.teridiumwar/GameData";
 			if (!Directory.Exists (PlayerDataDir))
 				Directory.CreateDirectory (PlayerDataDir);
 		}
@@ -88,7 +90,17 @@ namespace TeridiumRPG
 		public static Item LoadItem(string name)
 		{
 			return Deserializer.Deserialize<Item> (File.OpenText (ItemDataRoot + "/" + name + "/info.yml"));
+		}
 
+		public static Item[] LoadAllItems()
+		{
+			List<Item> items = new List<Item>();
+			foreach(string dir in Directory.GetDirectories(ItemDataRoot))
+			{
+				DirectoryInfo dirinfo = new DirectoryInfo (dir);
+				items.Add(LoadItem(dirinfo.Name));
+			}
+			return items.ToArray();
 		}
 	}
 }

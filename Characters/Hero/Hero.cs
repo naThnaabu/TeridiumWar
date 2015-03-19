@@ -8,34 +8,21 @@ namespace TeridiumRPG
     public class Hero : Character
     {
         #region Variables
-		public string weapon { get; set; }
-		public string helmetname { get; set; }
-		public string chestname { get; set; }
-		public string armname { get; set; }
-		public string legname { get; set; }
-		public string shouename { get; set; }
-
-		public int helmet { get; set; }
-		public int chest { get; set; }
-		public int arm { get; set; }
-		public int leg { get; set; }
-		public int shoue { get; set; }
-		public int ArmorValue { get; set; }
+		public Item weapon { get; set; }
+		public Item helmet { get; set; }
+		public Item chest { get; set; }
+		public Item arm { get; set; }
+		public Item leg { get; set; }
+		public Item shoe { get; set; }
 		public int AnzW6 { get; set; }
 		public int Level { get; set; }
-		public int CurrentInv { get; set; }
-		public int MaxInv { get; set; }
-
-		public List<string> Inventar { get; set; }
-		public List<string> WeaponInventar { get; set; }
-		public List<string> ArmorInventar { get; set; }
+		public int MaxInventory { get; set; }
+		public List<Item> Inventory { get; set; }
         #endregion
 
         public Hero()
         {
-			Inventar = new List<string>();
-			WeaponInventar = new List<string>();
-			ArmorInventar = new List<string>();
+			Inventory = new List<Item>();
         }
 
         #region functions
@@ -52,17 +39,12 @@ namespace TeridiumRPG
             isAlive = true;
             AttackDamage = 1;
             AnzW6 = 1;
-            weapon = "Sword";
-            arm = 0;
-            armname = "Nothing";
-            chest = 0;
-            chestname = "Shirt";
-            leg = 0;
-            legname = "Woolen trouser";
-            helmet = 0;
-            helmetname = "Nothing";
-            shouename = "Cheap leather shoes";
-            shoue = 0;
+			weapon = new Item ("Sword", ItemTypes.Weapon, 4);
+			arm = new Item ();
+			chest = new Item ("Shirt", ItemTypes.Cosmetic, 4);
+			leg = new Item ("Woolen trousers", ItemTypes.Cosmetic, 4);
+			helmet = new Item ();
+			shoe = new Item ("Cheap Leather shoes", ItemTypes.Cosmetic, 3);
             AnzBigHPPotions = 0;
             AnzLittleHPPotions = 1;
             AnzMiddleHPPotions = 0;
@@ -70,15 +52,23 @@ namespace TeridiumRPG
             AnzLittleMPPotions = 0;
             AnzMiddleMPPotions = 0;
             Level = 1;
-            CurrentInv = 15;
-            MaxInv = 15;
+            MaxInventory = 15;
         }
 
-        public int CalculateArmorValue()
+        public int ArmorValue()
         {
-            ArmorValue = arm + chest + leg + helmet + shoue;
-            return ArmorValue;
+			return arm.ArmorValue + chest.ArmorValue + leg.ArmorValue + helmet.ArmorValue + shoe.ArmorValue;
         }
+
+		public int CurrentInventory()
+		{
+			int retval;
+			foreach (Item item in this.Inventory) 
+			{
+				retval += item.Weight;
+			}
+			return retval;
+		}
 
         public void LevelUpdate()
         {
@@ -210,7 +200,6 @@ namespace TeridiumRPG
         public void PrintHeroStatus()
         {
             Console.Clear();
-            CalculateArmorValue();
             Console.Write(@"
 **************************************
 Name:   {0}Armor:   {6}
@@ -219,8 +208,28 @@ MP:     {3}/{4}Defense:  {8}
 Level:  {5}Gold:    {9}
 **************************************
 
-Press any Key to continue...", Identifier.PadRight(15, ' '), CurrentHealth.ToString().PadRight(3, ' '), MaxHealth.ToString().PadRight(11, ' '), CurrentMagic.ToString().PadRight(3, ' '), MaxMagic.ToString().PadRight(11, ' '), Level.ToString().PadRight(15, ' '), ArmorValue, Attack, Defense, Gold);
+Press any Key to continue...", Identifier.PadRight(15, ' '), CurrentHealth.ToString().PadRight(3, ' '), MaxHealth.ToString().PadRight(11, ' '), CurrentMagic.ToString().PadRight(3, ' '), MaxMagic.ToString().PadRight(11, ' '), Level.ToString().PadRight(15, ' '), ArmorValue(), Attack, Defense, Gold);
         }
+
+		public void EquipItem(Item item, string slot)
+		{
+			Type thisType = this.GetType();
+			System.Reflection.PropertyInfo property = thisType.GetProperty (slot);
+			this.UnEquip (slot);
+			property.SetValue (item);
+			this.Inventory.Remove (item);
+		}
+
+		public void UnEquip(string slot)
+		{
+			Type thisType = this.GetType();
+			System.Reflection.PropertyInfo property = thisType.GetProperty (slot);
+			Item equipedItem = (Item)property.GetValue ();
+			if (equipedItem.ItemType != ItemTypes.Nothing)
+				this.Inventory.Add (equipedItem);
+			property.SetValue (new Item());
+		}
+
         #endregion
     }
 }

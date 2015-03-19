@@ -1,0 +1,4 @@
+﻿name: default
+description: Default Shop to test the Game
+sells:
+- all

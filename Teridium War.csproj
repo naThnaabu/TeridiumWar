@@ -108,6 +108,7 @@
     <Compile Include="Buildings\Tavern.cs" />
     <Compile Include="Spells\WaterStrike.cs" />
     <Compile Include="Game\Game.cs" />
+    <Compile Include="Items\ItemTypes.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Pictures\rpg_icon_1.ico" />
@@ -294,6 +295,19 @@
     <None Include="CharacterData\Lizardman\info.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="ItemData\Sword\info.yml" />
+    <None Include="GameData\Shops\default\info.yml" />
+    <None Include="GameData\Shops\default\weapon.txt" />
+    <None Include="GameData\Shops\default\banner.txt" />
+    <None Include="GameData\Shops\default\chest.txt" />
+    <None Include="GameData\Shops\default\leg.txt" />
+    <None Include="GameData\Shops\default\shoes.txt" />
+    <None Include="GameData\Shops\default\potion.txt" />
+    <None Include="GameData\Shops\default\armor.txt" />
+    <None Include="GameData\Shops\default\helmet.txt" />
+    <None Include="GameData\Shops\default\sword.txt" />
+    <None Include="GameData\Shops\default\mace.txt" />
+    <None Include="GameData\Shops\default\bow.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -307,5 +321,9 @@
     <Folder Include="Game\" />
     <Folder Include="ItemData\" />
     <Folder Include="CharacterData\" />
+    <Folder Include="ItemData\Sword\" />
+    <Folder Include="GameData\" />
+    <Folder Include="GameData\Shops\" />
+    <Folder Include="GameData\Shops\default\" />
   </ItemGroup>
 </Project>

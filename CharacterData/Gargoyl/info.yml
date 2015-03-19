@@ -1,0 +1,10 @@
+CurrentHealth: 16
+MaxHealth: 16
+Attack: 9
+Defense: 8
+Experience: 43
+AttackDamage: 5
+Identifier: Gargoyl
+Print: character.txt
+isAlive: true
+Gold: 11

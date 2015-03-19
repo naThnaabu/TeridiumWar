@@ -1,0 +1,10 @@
+CurrentHealth: 19
+MaxHealth: 19
+Attack: 10
+Defense: 9
+Experience: 29
+AttackDamage: 6
+Identifier: Zentaur
+Print: character.txt
+isAlive: true
+Gold: 7

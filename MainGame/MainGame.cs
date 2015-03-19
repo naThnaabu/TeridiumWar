@@ -8,56 +8,16 @@ namespace TeridiumRPG
 {
     class MainGame
     {
-        #region creation of all the objects
-        Hero myhero;
-        Troll troll;
-        Tiger tiger;
-        Goblin goblin;
-        Ork ork;
-        FeuerDrache feuerdrache;
-        EchsenMensch echsenmensch;
-        Riesenratte riesenratte;
-        HoelenBaer hoelenbaer;
-        Battle battle;
-        Shop shop;
-        Tavern tavern;
-        Spider spider;
-        Wolf wolf;
-        Werwolf werwolf;
-        Gargoyl gargoyl;
-        Gryphon gryphon;
-        Harpye harpye;
-        Hydra hydra;
-        Minotauer minotauer;
-        Mummy mummy;
-        Wyvern wyvern;
-        Zentaur zentaur;
-        Jason jason;
-        KnightHellebard knighth;
-        KnightSword knights;
-        WolfDeamon wolfdeamon;
-        Mage mage;
-        Warlock warlock;
-        Druid druid;
-        Prist prist;
-
-        HeroDataHandler datahandler;
-        #endregion
+		Shop shop;
+		Hero myhero;
+		Tavern tavern;
+		Battle battle;
 
         public MainGame()
         {
-            if (File.Exists(@"C:\Program Files\TeridiumRPG\Teridium War\Itemlist.txt") == false)
-            {
-                Directory.CreateDirectory(@"C:\Program Files\TeridiumRPG\Teridium War");
-                string[] line = new string[] { "Shoes of Might;3", "Shoes of the King;6", "Shoes of the truth;7", "Trousers of Might;3", "Trousers of the King;6", "Trousers of the truth;7", "Chest of Might;3", "Chest of the King;6", "Chest of the truth;7", "Arm guard of Might;3", "Arm guard of the King;6", "Arm guard of the truth;7", "Helmet of Might;3", "Helmet of the King;6", "Helmet of the truth;7" };
-                File.WriteAllLines(@"C:\Program Files\TeridiumRPG\Teridium War\Itemlist.txt", line);
-            }
-
-            #region Variables
+			string[] line = new string[] { "Shoes of Might;3", "Shoes of the King;6", "Shoes of the truth;7", "Trousers of Might;3", "Trousers of the King;6", "Trousers of the truth;7", "Chest of Might;3", "Chest of the King;6", "Chest of the truth;7", "Arm guard of Might;3", "Arm guard of the King;6", "Arm guard of the truth;7", "Helmet of Might;3", "Helmet of the King;6", "Helmet of the truth;7" };
             bool banotherround;
-            #endregion
 
-            #region Console attributes
             OperatingSystem os = Environment.OSVersion;
             PlatformID pid = os.Platform;
             switch (pid)
@@ -75,89 +35,53 @@ namespace TeridiumRPG
                 default:
                     break;
             }
-            #endregion
 
-            #region Creations
-            datahandler = new HeroDataHandler();
+			List<Character> MonsterList = new List<Character>(Game.LoadAllCharacters());
 
-            #region Monster creation
-            troll = new Troll();
-            tiger = new Tiger();
-            goblin = new Goblin();
-            ork = new Ork();
-            feuerdrache = new FeuerDrache();
-            echsenmensch = new EchsenMensch();
-            riesenratte = new Riesenratte();
-            hoelenbaer = new HoelenBaer();
-            spider = new Spider();
-            wolf = new Wolf();
-            werwolf = new Werwolf();
-            gargoyl = new Gargoyl();
-            gryphon = new Gryphon();
-            harpye = new Harpye();
-            //hydra = new Hydra();
-            minotauer = new Minotauer();
-            mummy = new Mummy();
-            wyvern = new Wyvern();
-            zentaur = new Zentaur();
-            //jason = new Jason();
-            knighth = new KnightHellebard();
-            knights = new KnightSword();
-            wolfdeamon = new WolfDeamon();
-            mage = new Mage();
-            warlock = new Warlock();
-            druid = new Druid();
-            prist = new Prist();
 
-            #region MonsterList
-            List<Character> MonsterList = new List<Character> { };
-            MonsterList.Add(troll);
-            MonsterList.Add(tiger);
-            MonsterList.Add(goblin);
-            MonsterList.Add(ork);
-            MonsterList.Add(feuerdrache);
-            MonsterList.Add(riesenratte);
-            MonsterList.Add(hoelenbaer);
-            MonsterList.Add(wolf);
-            MonsterList.Add(spider);
-            MonsterList.Add(werwolf);
-            MonsterList.Add(gargoyl);
-            MonsterList.Add(gryphon);
-            MonsterList.Add(harpye);
-            //MonsterList.Add(hydra);
-            MonsterList.Add(minotauer);
-            MonsterList.Add(mummy);
-            MonsterList.Add(wyvern);
-            MonsterList.Add(zentaur);
-            //MonsterList.Add(jason);
-            MonsterList.Add(knighth);
-            MonsterList.Add(knights);
-            MonsterList.Add(wolfdeamon);
-            MonsterList.Add(mage);
-            MonsterList.Add(warlock);
-            MonsterList.Add(druid);
-            MonsterList.Add(prist);
-            //Add all monsters to a List
-            #endregion
-            #endregion
+			var heroes = Game.ListHeros();
+			if(heroes.Length < 1 ){
+				myhero = new Hero();
+				Console.WriteLine("Whats you name?");
+				myhero.Identifier = Console.ReadLine();
+				myhero.Initialize();
+				Game.SaveHero(myhero);
+			} else if(heroes.Length == 1){
+				myhero = Game.LoadHero((string)heroes.GetValue(0));
+			} else {
+				Console.Write("Which character would you like to play?\n**************************************\n");
+				for (int x = 0; x < heroes.Length; x++)
+				{
+					int y = x+1;
+					Console.WriteLine("(" + y + ") " + (string)heroes.GetValue(x));
+				}
+				Console.WriteLine("(N)ew Character?");
+				Console.WriteLine("**************************************");
+				ConsoleKeyInfo CharKey;
+				CharKey = Console.ReadKey(true);
+				string sCharKey;
+				sCharKey = CharKey.KeyChar.ToString();
+				if (sCharKey != "N" & sCharKey != "n")
+				{
+					int iCharKey = Convert.ToInt32(sCharKey);
+					iCharKey--;
+					myhero = Game.LoadHero((string)heroes.GetValue(iCharKey));
+				}
+				else
+				{
+					myhero = new Hero();
+					Console.WriteLine("Whats you name?");
+					myhero.Identifier = Console.ReadLine();
+					myhero.Initialize();
+					Game.SaveHero(myhero);
+				}
+			}
 
-            #region Hero creation
-            myhero = new Hero();
-            //create the hero
-            #endregion
-
-            #endregion
-
-            #region Check Hero stuff
             if (myhero.CurrentHealth <= 0)
             {
                 myhero.CurrentHealth = myhero.MaxHealth;
             }
-            #endregion
 
-            #region The Game
-
-            myhero = datahandler.Load();
             RPGStart();
             do
             {
@@ -166,9 +90,6 @@ namespace TeridiumRPG
                 banotherround = Decide(ChoosenMonster, myhero);
             }
             while (banotherround == true);
-            //Choose one monster from the list and start the Battle Class
-            datahandler.Save(myhero, false);
-            #endregion
         }
 
         #region functions
@@ -228,7 +149,7 @@ namespace TeridiumRPG
 
                 case "s":
                 case "S":
-				datahandler.Save(hero, false);
+					Game.SaveHero(myhero);
                     banotherround = true;
                     break;
 
@@ -548,8 +469,6 @@ Nr.         Name                 Own          Armor      Place
 ");
             #endregion
             }
-            HeroDataHandler datahandler = new HeroDataHandler();
-            datahandler.Save(hero, true);
             int i = 0;
 
             #region Write Items
@@ -596,9 +515,7 @@ Nr.         Name                 Own          Armor      Place
                     string name;
                     int Itemcost = 0;
 
-                    string[] lines = System.IO.File.ReadAllLines(@"c:\Program Files\TeridiumRPG\Teridium War\Itemlist.txt");
-
-                    foreach (string line in lines)
+				foreach (string line in myhero.WeaponInventar)
                     {
                         string[] itemline;
                         itemline = line.Split(';');

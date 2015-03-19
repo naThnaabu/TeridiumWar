@@ -1,0 +1,10 @@
+CurrentHealth: 20
+MaxHealth: 20
+Attack: 9
+Defense: 11
+Experience: 44
+AttackDamage: 5
+Identifier: Mummy
+Print: character.txt
+isAlive: true
+Gold: 12

@@ -5,11 +5,14 @@ using System.Text;
 
 namespace TeridiumRPG
 {
-    class Item
+    public class Item
     {
         #region Variables
-        public string Type, Identifier;
-        public int Price, InvStaple, InvCanHave;
+		public string Type { get; set; }
+		public string Identifier { get; set; }
+		public int Price { get; set; }
+		public int InvStaple { get; set; }
+		public int InvCanHave { get; set; }
         #endregion
 
         public Item()

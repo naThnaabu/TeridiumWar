@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TeridiumRPG
 {
-    class Character
+    public class Character
     {
         #region Variables
 		public int CurrentHealth { get; set; }

@@ -1,0 +1,10 @@
+CurrentHealth: 10
+MaxHealth: 10
+Attack: 6
+Defense: 5
+Experience: 21
+AttackDamage: 2
+Identifier: Giant Rat
+Print: character.txt
+isAlive: true
+Gold: 5

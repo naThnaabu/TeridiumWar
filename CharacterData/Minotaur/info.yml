@@ -1,0 +1,10 @@
+CurrentHealth: 23
+MaxHealth: 23
+Attack: 12
+Defense: 11
+Experience: 31
+AttackDamage: 8
+Identifier: Minotaur
+Print: character.txt
+isAlive: true
+Gold: 9

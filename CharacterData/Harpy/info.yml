@@ -1,0 +1,10 @@
+CurrentHealth: 16
+MaxHealth: 16
+Attack: 9
+Defense: 7
+Experience: 33
+AttackDamage: 5
+Identifier: Harpy
+Print: character.txt
+isAlive: true
+Gold: 9

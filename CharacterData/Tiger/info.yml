@@ -1,0 +1,10 @@
+CurrentHealth: 13
+MaxHealth: 13
+Attack: 7
+Defense: 6
+Experience: 10
+AttackDamage: 3
+Identifier: Tiger
+Print: character.txt
+isAlive: true
+Gold: 2

@@ -1,0 +1,12 @@
+CurrentHealth: 16
+MaxHealth: 16
+CurrentMagic: 35
+MaxMagic: 35
+Attack: 7
+Defense: 7
+Experience: 48
+AttackDamage: 3
+Identifier: Prist
+Print: character.txt
+isAlive: true
+Gold: 12

@@ -1,0 +1,10 @@
+CurrentHealth: 15
+MaxHealth: 15
+Attack: 8
+Defense: 7
+Experience: 18
+AttackDamage: 4
+Identifier: Spider
+Print: character.txt
+isAlive: true
+Gold: 6

@@ -1,0 +1,10 @@
+CurrentHealth: 25
+MaxHealth: 25
+Attack: 13
+Defense: 12
+Experience: 40
+AttackDamage: 9
+Identifier: Werewolf
+Print: character.txt
+isAlive: true
+Gold: 9

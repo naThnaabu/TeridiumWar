@@ -1,0 +1,10 @@
+CurrentHealth: 12
+MaxHealth: 12
+Attack: 6
+Defense: 6
+Experience: 32
+AttackDamage: 3
+Identifier: Goblin
+Print: character.txt
+isAlive: true
+Gold: 8

@@ -40,6 +40,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <Externalconsole>true</Externalconsole>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -78,15 +79,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Characters\Monsters\Ohne Bilder\Basilisk.cs" />
-    <Compile Include="DataHandler\DataHandler.cs" />
-    <Compile Include="Characters\Monsters\Ohne Bilder\FireGolem.cs" />
-    <Compile Include="Characters\Monsters\Gargoyl.cs" />
-    <Compile Include="Characters\Monsters\Gryphon.cs" />
-    <Compile Include="Characters\Monsters\Harpye.cs" />
-    <Compile Include="Characters\Monsters\Ohne Bilder\Hydra.cs" />
-    <Compile Include="Characters\Monsters\Ohne Bilder\Elf.cs" />
-    <Compile Include="Characters\Monsters\Druid.cs" />
     <Compile Include="Items\Armor\ArmorArm.cs" />
     <Compile Include="Items\Armor\ArmorShoe.cs" />
     <Compile Include="Battle\Battle.cs" />
@@ -96,23 +88,10 @@
     <Compile Include="Items\Potions\HP_big_potion.cs" />
     <Compile Include="Items\Potions\HP_little_potion.cs" />
     <Compile Include="Items\Potions\HP_middle_potion.cs" />
-    <Compile Include="Characters\Monsters\EchsenMensch.cs" />
-    <Compile Include="Characters\Monsters\FeuerDrache.cs" />
-    <Compile Include="Characters\Monsters\HoelenBaer.cs" />
-    <Compile Include="Characters\Monsters\Riesenratte.cs" />
     <Compile Include="Items\Weapons\Bow.cs" />
     <Compile Include="Characters\Character.cs" />
     <Compile Include="Items\Armor\ArmorChest.cs" />
-    <Compile Include="Characters\Monsters\Ohne Bilder\Lindworm.cs" />
-    <Compile Include="Characters\Monsters\Minotauer.cs" />
-    <Compile Include="Characters\Monsters\Mummy.cs" />
-    <Compile Include="Characters\Monsters\Jason.cs" />
-    <Compile Include="Characters\Monsters\KnightHellebard.cs" />
-    <Compile Include="Characters\Monsters\KnightSword.cs" />
-    <Compile Include="Characters\Monsters\Mage.cs" />
-    <Compile Include="Characters\Monsters\Prist.cs" />
     <Compile Include="Spells\Fireball.cs" />
-    <Compile Include="Characters\Monsters\Goblin.cs" />
     <Compile Include="Spells\Heal_little.cs" />
     <Compile Include="Items\Armor\ArmorHelmet.cs" />
     <Compile Include="Characters\Hero\Hero.cs" />
@@ -121,25 +100,14 @@
     <Compile Include="Items\Armor\ArmorLeg.cs" />
     <Compile Include="Items\Weapons\Mace.cs" />
     <Compile Include="MainGame\MainGame.cs" />
-    <Compile Include="Characters\Monsters\Monster.cs" />
-    <Compile Include="Characters\Monsters\Ork.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Buildings\Shop.cs" />
     <Compile Include="Spells\Spell.cs" />
     <Compile Include="Items\Weapons\Sword.cs" />
     <Compile Include="Buildings\Tavern.cs" />
-    <Compile Include="Characters\Monsters\Tiger.cs" />
-    <Compile Include="Characters\Monsters\Troll.cs" />
     <Compile Include="Spells\WaterStrike.cs" />
-    <Compile Include="Characters\Monsters\Spider.cs" />
-    <Compile Include="Characters\Monsters\Wolf.cs" />
-    <Compile Include="Characters\Monsters\Werwolf.cs" />
-    <Compile Include="Characters\Monsters\Ohne Bilder\StoneGolem.cs" />
-    <Compile Include="Characters\Monsters\Wyvern.cs" />
-    <Compile Include="Characters\Monsters\Zentaur.cs" />
-    <Compile Include="Characters\Monsters\WolfDeamon.cs" />
-    <Compile Include="Characters\Monsters\Warlock.cs" />
+    <Compile Include="Game\Game.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Pictures\rpg_icon_1.ico" />
@@ -170,6 +138,162 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="CharacterData\Cave Bear\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Cave Bear\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Druid\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Druid\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Fire Dragon\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Fire Dragon\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Gargoyl\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Gargoyl\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Giant Rat\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Giant Rat\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Goblin\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Goblin\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Gryphon\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Gryphon\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Harpy\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Harpy\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Hyra\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Hyra\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Knight\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Knight\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Mage\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Mage\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Minotaur\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Minotaur\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Mummy\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Mummy\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Ork\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Ork\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Prist\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Prist\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Spider\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Spider\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Tiger\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Tiger\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Troll\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Troll\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Warlock\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Warlock\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Werewolf\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Werewolf\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Wild Jason\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Wild Jason\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Wolf\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Wolf\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Wolf Daemon\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Wolf Daemon\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Wyvern\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Wyvern\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Zentaur\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Zentaur\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Lizardman\character.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="CharacterData\Lizardman\info.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -179,4 +303,9 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Game\" />
+    <Folder Include="ItemData\" />
+    <Folder Include="CharacterData\" />
+  </ItemGroup>
 </Project>

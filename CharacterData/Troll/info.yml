@@ -1,0 +1,10 @@
+CurrentHealth: 25
+MaxHealth: 25
+Attack: 14
+Defense: 11
+Experience: 44
+AttackDamage: 10
+Identifier: Troll
+Print: character.txt
+isAlive: true
+Gold: 12

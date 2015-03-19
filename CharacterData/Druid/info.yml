@@ -1,0 +1,12 @@
+﻿CurrentHealth: 13
+MaxHealth: 13
+CurrentMagic: 25
+MaxMagic: 25
+Attack: 7
+Defense: 6
+Experience: 46
+AttackDamage: 3
+Identifier: Druid
+isAlive: true
+Gold: 13
+Print: character.txt

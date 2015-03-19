@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TeridiumRPG
 {
-    class Hero : Character
+    public class Hero : Character
     {
         #region Variables
 		public string weapon { get; set; }

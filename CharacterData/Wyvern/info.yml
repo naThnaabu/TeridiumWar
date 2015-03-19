@@ -1,0 +1,10 @@
+CurrentHealth: 30
+MaxHealth: 30
+Attack: 14
+Defense: 11
+Experience: 51
+AttackDamage: 10
+Identifier: Wyvern
+Print: character.txt
+isAlive: true
+Gold: 12

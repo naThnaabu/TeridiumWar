@@ -1,0 +1,10 @@
+CurrentHealth: 12
+MaxHealth: 12
+Attack: 6
+Defense: 6
+Experience: 11
+AttackDamage: 2
+Identifier: Wolf
+Print: character.txt
+isAlive: true
+Gold: 3

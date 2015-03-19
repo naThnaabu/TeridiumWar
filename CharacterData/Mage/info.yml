@@ -1,0 +1,12 @@
+CurrentHealth: 18
+MaxHealth: 18
+CurrentMagic: 30
+MaxMagic: 30
+Attack: 8
+Defense: 8
+Experience: 63
+AttackDamage: 4
+Identifier: Mage
+Print: character.txt
+isAlive: true
+Gold: 16

@@ -1,0 +1,10 @@
+CurrentHealth: 30
+MaxHealth: 30
+Attack: 15
+Defense: 12
+Experience: 55
+AttackDamage: 11
+Identifier: Fire Dragon
+Print: character.txt
+isAlive: true
+Gold: 13

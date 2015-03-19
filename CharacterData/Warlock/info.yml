@@ -1,0 +1,12 @@
+CurrentHealth: 12
+MaxHealth: 12
+CurrentMagic: 40
+MaxMagic: 40
+Attack: 6
+Defense: 6
+Experience: 49
+AttackDamage: 2
+Identifier: Warlock
+Print: character.txt
+isAlive: true
+Gold: 13

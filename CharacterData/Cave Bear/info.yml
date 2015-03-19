@@ -1,0 +1,10 @@
+CurrentHealth: 16
+MaxHealth: 16
+Attack: 9
+Defense: 7
+Experience: 10
+AttackDamage: 5
+Identifier: Cave Bear
+Print: character.txt
+isAlive: true
+Gold: 2

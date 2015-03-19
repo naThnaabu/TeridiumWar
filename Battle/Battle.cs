@@ -10,7 +10,6 @@ namespace TeridiumRPG
     {
         #region Variables
         int round = 1;
-        HeroDataHandler datahandler;
         #endregion
 
         #region The Battle
@@ -70,8 +69,7 @@ drink some potions/rest in the Inn.
                 {
                     case "l":
                     case "L":
-                        DataHandler datahandler = new DataHandler();
-                        datahandler.Load(hero);
+
                         break;
 
                     case "G":
@@ -223,7 +221,6 @@ Type in what you want to do:
                         }
                         else
                         {
-                            HeroDataHandler datahandler = new HeroDataHandler();
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("You have killed the " + monster.Identifier + "!");
                             hero.Experience += monster.Experience;
@@ -235,7 +232,7 @@ Type in what you want to do:
                             Console.ReadKey();
                             Console.ForegroundColor = ConsoleColor.Gray;
                             Console.Clear();
-							datahandler.Save(hero, false);
+							Game.SaveHero (hero);
                         }
                     }
                 }

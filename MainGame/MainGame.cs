@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using TeridiumRPG.Buildings;
+using TeridiumRPG.Characters;
+using TeridiumRPG.Items;
 
 namespace TeridiumRPG
 {
     class MainGame
     {
-        TeridiumRPG.Shop.Shop shop;
+        Shop shop;
         Hero myhero;
         Tavern tavern;
         Battle battle;
@@ -15,13 +18,15 @@ namespace TeridiumRPG
         bool playGame;
         string[] mainmenu;
 
-        public MainGame ()
+        public MainGame()
         {
-            shop = Game.LoadShop ("default");
-            MonsterList = new List<Character> (Game.LoadAllCharacters ());
+            shop = Game.LoadShop("default");
+            tavern = Game.LoadTavern("default");
+            MonsterList = new List<Character>(Game.LoadAllCharacters());
             posttext = "";
             playGame = true;
-            mainmenu = new string[] {
+            mainmenu = new string[]
+            {
                 "Open Player Stats",
                 "Visit the Shop",
                 "Fight against a Monster",
@@ -31,98 +36,90 @@ namespace TeridiumRPG
             };
         }
 
-        public int Play ()
+        public int Play()
         {
-
-            string[] line = new string[] {
-                "Shoes of Might;3",
-                "Shoes of the King;6",
-                "Shoes of the truth;7",
-                "Trousers of Might;3",
-                "Trousers of the King;6",
-                "Trousers of the truth;7",
-                "Chest of Might;3",
-                "Chest of the King;6",
-                "Chest of the truth;7",
-                "Arm guard of Might;3",
-                "Arm guard of the King;6",
-                "Arm guard of the truth;7",
-                "Helmet of Might;3",
-                "Helmet of the King;6",
-                "Helmet of the truth;7"
-            };
-
             //Loading of Hero and selection
-            var heroes = Game.ListHeros ();
-            if (heroes.Length < 1) {
-                myhero = new Hero ();
-                Console.WriteLine ("Whats you name?");
-                myhero.Identifier = Console.ReadLine ();
-                myhero.Initialize ();
-                Game.SaveHero (myhero);
-            } else if (heroes.Length == 1) {
-                myhero = Game.LoadHero ((string)heroes.GetValue (0));
-            } else {
-                Console.Write ("Which character would you like to play?\n**************************************\n");
-                for (int x = 0; x < heroes.Length; x++) {
+            var heroes = Game.ListHeros();
+            if (heroes.Length < 1)
+            {
+                myhero = new Hero();
+                Console.WriteLine("Whats you name?");
+                myhero.Identifier = Console.ReadLine();
+                myhero.Initialize();
+                Game.SaveHero(myhero);
+            }
+            else if (heroes.Length == 1)
+            {
+                myhero = Game.LoadHero((string)heroes.GetValue(0));
+            }
+            else
+            {
+                Console.Write("Which character would you like to play?\n**************************************\n");
+                for (int x = 0; x < heroes.Length; x++)
+                {
                     int y = x + 1;
-                    Console.WriteLine ("(" + y + ") " + (string)heroes.GetValue (x));
+                    Console.WriteLine("(" + y + ") " + (string)heroes.GetValue(x));
                 }
-                Console.WriteLine ("(N)ew Character?");
-                Console.WriteLine ("**************************************");
+                Console.WriteLine("(N)ew Character?");
+                Console.WriteLine("**************************************");
                 ConsoleKeyInfo CharKey;
-                CharKey = Console.ReadKey (true);
+                CharKey = Console.ReadKey(true);
                 string sCharKey;
-                sCharKey = CharKey.KeyChar.ToString ();
-                if (sCharKey != "N" & sCharKey != "n") {
-                    int iCharKey = Convert.ToInt32 (sCharKey);
+                sCharKey = CharKey.KeyChar.ToString();
+                if (sCharKey != "N" & sCharKey != "n")
+                {
+                    int iCharKey = Convert.ToInt32(sCharKey);
                     iCharKey--;
-                    myhero = Game.LoadHero ((string)heroes.GetValue (iCharKey));
-                } else {
-                    myhero = new Hero ();
-                    Console.WriteLine ("Whats you name?");
-                    myhero.Identifier = Console.ReadLine ();
-                    myhero.Initialize ();
-                    Game.SaveHero (myhero);
+                    myhero = Game.LoadHero((string)heroes.GetValue(iCharKey));
+                }
+                else
+                {
+                    myhero = new Hero();
+                    Console.WriteLine("Whats you name?");
+                    myhero.Identifier = Console.ReadLine();
+                    myhero.Initialize();
+                    Game.SaveHero(myhero);
                 }
             }
 
             //Print Start Banner
-            RPGStart ();
+            RPGStart();
 
             //Main Game Loop
-            while (playGame == true) {
-                Random rnd = new Random ();
-                var ChoosenMonster = MonsterList [rnd.Next (MonsterList.Count)];
-                int choice = GameOutput.printMenu (mainmenu, stars, stars, "", posttext);
-                switch (choice) {
+            while (playGame == true)
+            {
+                Random rnd = new Random();
+                var ChoosenMonster = MonsterList[rnd.Next(MonsterList.Count)];
+                int choice = GameOutput.PrintMenu(mainmenu, stars, stars, "", posttext);
+                switch (choice)
+                {
                     case 0:
-                        Console.Clear ();
-                        myhero.PrintCharacterSheet ();
-                        Console.ReadKey ();
+                        Console.Clear();
+                        myhero.PrintCharacterSheet();
+                        Console.ReadKey();
                         posttext = "";
                         playGame = true;
                         break;
 
                     case 1:
-                        myhero = shop.Visit (myhero);
+                        myhero = shop.Visit(myhero);
                         playGame = true;
                         break;
 
                     case 2:
-                        battle = new Battle (myhero, ChoosenMonster);
+                        battle = new Battle(myhero, ChoosenMonster);
                         posttext = "";
                         playGame = true;
                         break;
 
                     case 3:
-                        tavern = new Tavern (myhero);
+                        myhero = tavern.Visit(myhero);
                         posttext = "";
                         playGame = true;
                         break;
 
                     case 4:
-                        Game.SaveHero (myhero);
+                        Game.SaveHero(myhero);
                         posttext = "Hero Saved";
                         playGame = true;
                         break;
@@ -130,14 +127,14 @@ namespace TeridiumRPG
                     case 5:
                         playGame = false;
                         posttext = "";
-                        Console.WriteLine ("Good Bye");
+                        Console.WriteLine("Good Bye");
                         break;
 
                     default:
                         posttext = "I'm sorry that wasn't a valid choice.";
                         break;
                 }
-                Game.SaveHero (myhero);
+                Game.SaveHero(myhero);
             }
             return 0;
         }
@@ -146,10 +143,10 @@ namespace TeridiumRPG
 
         #region Startscreen
 
-        void RPGStart ()
+        void RPGStart()
         {
-            Console.Clear ();
-            Console.Write (@"
+            Console.Clear();
+            Console.Write(@"
   _____         _     _ _                   ____  ____   ____ 
  |_   _|__ _ __(_) __| (_)_   _ _ __ ___   |  _ \|  _ \ / ___|
    | |/ _ \ '__| |/ _` | | | | | '_ ` _ \  | |_) | |_) | |  _ 
@@ -174,15 +171,16 @@ namespace TeridiumRPG
 		  
 ");
 
-            Console.WriteLine ();
+            Console.WriteLine();
             ConsoleKeyInfo choiceKey;
-            choiceKey = Console.ReadKey (true);
-            string choice = choiceKey.KeyChar.ToString ();
-            switch (choice) {
+            choiceKey = Console.ReadKey(true);
+            string choice = choiceKey.KeyChar.ToString();
+            switch (choice)
+            {
                 case "t":
                 case "T":
-                    Console.Clear ();
-                    Console.Write (@"Welcome to the tutorial. 
+                    Console.Clear();
+                    Console.Write(@"Welcome to the tutorial. 
 Teridium RPG is a textbased RPG. Your Character starts with nearly 
 nothing but during the game you will get stronger and stronger.
 
@@ -208,9 +206,9 @@ After your Attack is finished, the monster can do the same to you ;)
 
 
 Press any key to continue...");
-                    Console.ReadKey ();
-                    Console.Clear ();
-                    Console.Write (@"Here is a Sample of a fight:
+                    Console.ReadKey();
+                    Console.Clear();
+                    Console.Write(@"Here is a Sample of a fight:
 Hero                        Monster
 Attack: 9                   Attack: 12
 Defense: 8                  Defense: 12
@@ -239,10 +237,10 @@ He miss....
 
 
 Press any key to continue...");
-                    Console.ReadKey ();
-                    Console.Clear ();
+                    Console.ReadKey();
+                    Console.Clear();
 
-                    Console.Write (@"Option 2 Spell:
+                    Console.Write(@"Option 2 Spell:
 Hero                        Monster
 HP: 18                      HP: 19
 MP: 30                      MP: 0
@@ -271,10 +269,10 @@ He miss....
 
 
 Press any key to continue...");
-                    Console.ReadKey ();
-                    Console.Clear ();
+                    Console.ReadKey();
+                    Console.Clear();
 
-                    Console.Write (@"Option 3 Potions:
+                    Console.Write(@"Option 3 Potions:
 Which Potion would you like to drink:
 (1)Little HP Potion      
 (2)Middle HP Potion
@@ -289,10 +287,10 @@ He miss....
 
 
 Press any key to continue...");
-                    Console.ReadKey ();
-                    Console.Clear ();
+                    Console.ReadKey();
+                    Console.Clear();
 
-                    Console.Write (@"Damage Dealing you:
+                    Console.Write(@"Damage Dealing you:
 Hero                        Monster
 HP: 18                      HP: 19
 MP: 30                      MP: 0
@@ -312,9 +310,9 @@ Your enemy lost 4 HP and has now 15 left.
 
 
 Press any key to continue...");
-                    Console.ReadKey ();
-                    Console.Clear ();
-                    Console.Write (@"Damage Dealing enemy:
+                    Console.ReadKey();
+                    Console.Clear();
+                    Console.Write(@"Damage Dealing enemy:
 Hero                        Monster
 HP: 18                      HP: 19
 MP: 30                      MP: 0
@@ -332,11 +330,11 @@ Your lost 3 HP and you have now 15 left.
 
 ");
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine ("Press any key to go back to the game.");
+                    Console.WriteLine("Press any key to go back to the game.");
                     Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.ReadKey ();
-                    Console.Clear ();
-                    System.Threading.Thread.Sleep (800);
+                    Console.ReadKey();
+                    Console.Clear();
+                    System.Threading.Thread.Sleep(800);
                     break;
 
                 case "P":
@@ -344,8 +342,8 @@ Your lost 3 HP and you have now 15 left.
                     return;
 
                 default:
-                    Console.Clear ();
-                    RPGStart ();
+                    Console.Clear();
+                    RPGStart();
                     break;
             }
         }
@@ -354,22 +352,23 @@ Your lost 3 HP and you have now 15 left.
 
         #region ShowInventory
 
-        void PrintInventory (Hero hero)
+        void PrintInventory(Hero hero)
         {
-            Console.Clear ();
-            Console.Write (@"**************************************************************
+            Console.Clear();
+            Console.Write(@"**************************************************************
 Nr.                    Name                 Weight      Price
 --------------------------------------------------------------
 ");
             int i = 1;
-            foreach (Item item in hero.Inventory) {
-                Console.WriteLine ("{0}                    {1}                  {2}       {3}", i, item.Name, item.Weight, item.Price);
+            foreach (Item item in hero.Inventory)
+            {
+                Console.WriteLine("{0}                    {1}                  {2}       {3}", i, item.Name, item.Weight, item.Price);
                 i++;
             }
-            Console.WriteLine ("--------------------------------------------------------------");
-            Console.WriteLine ("**************************************************************");
-            Console.WriteLine ("Press any key to continue...");
-            Console.ReadKey ();
+            Console.WriteLine("--------------------------------------------------------------");
+            Console.WriteLine("**************************************************************");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
         }
 
         #endregion

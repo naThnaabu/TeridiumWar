@@ -1,0 +1,7 @@
+!TeridiumRPG.Items.Item,%20Teridium%20War,%20Version=1.0.0.0,%20Culture=neutral,%20PublicKeyToken=null
+ItemType: Armor
+Name: Helmet of the truth
+Category: Helmet
+Price: 10
+DefenseValue: 7
+Weight: 7

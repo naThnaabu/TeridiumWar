@@ -1,0 +1,7 @@
+!TeridiumRPG.Items.Item,%20Teridium%20War,%20Version=1.0.0.0,%20Culture=neutral,%20PublicKeyToken=null
+ItemType: Armor
+Name: Arm guard of the King
+Category: Arm
+Price: 10
+DefenseValue: 3
+Weight: 6

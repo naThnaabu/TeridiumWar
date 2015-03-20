@@ -1,64 +1,69 @@
-﻿name: default
-description: Default Shop to test the Game
-categories:
-- subcategories:
-  - name: Helmets
-    collumns:
+﻿Name: default
+Description: Default Shop to test the Game
+Categories:
+- Subcategories:
+  - Name: Helmet
+    Collumns:
     - Name
     - ArmorValue
     - Price
-  - name: Chests
-    collumns:
+  - Name: Chest
+    Collumns:
     - Name
     - ArmorValue
     - Price
-  - name: Legs
-    collumns:
+  - Name: Leg
+    Collumns:
     - Name
     - ArmorValue
     - Price
-  - name: Shoes
-    collumns:
+  - Name: Shoe
+    Collumns:
     - Name
     - ArmorValue
     - Price
-  name: Armor
-  collumns:
+  - Name: Arm
+    Collumns:
+    - Name
+    - ArmorValue
+    - Price
+  Name: Armor
+  Collumns:
   - Name
   - ArmorValue
   - Price
-- subcategories:
-  - name: Swords
-    collumns:
+- Subcategories:
+  - Name: Sword
+    Collumns:
     - Name
     - AttackValue
     - DamageValue
     - AnzW6
     - Price
-  - name: Maces
-    collumns:
+  - Name: Mace
+    Collumns:
     - Name                                                                                                                                                                                                     
     - AttackValue                                                                                                                                                                                              
     - DamageValue                                                                                                                                                                                              
     - AnzW6                                                                                                                                                                                                    
     - Price                                                                                                                                                                                                    
-  - name: Bows                                                                                                                                                                                                 
-    collumns:                                                                                                                                                                                                  
+  - Name: Bow                                                                                                                                                                                             
+    Collumns:                                                                                                                                                                                                  
     - Name                                                                                                                                                                                                     
     - AttackValue                                                                                                                                                                                              
     - DamageValue                                                                                                                                                                                              
     - AnzW6                                                                                                                                                                                                    
     - Price                                                                                                                                                                                                    
-  name: Weapons                                                                                                                                                                                                
-  collumns:                                                                                                                                                                                                    
+  Name: Weapon                                                                                                                                                                                               
+  Collumns:                                                                                                                                                                                                    
   - Name                                                                                                                                                                                                       
   - AttackValue                                                                                                                                                                                                
   - DamageValue                                                                                                                                                                                                
   - AnzW6                                                                                                                                                                                                      
   - Price                                                                                                                                                                                                      
-- name: Potions                                                                                                                                                                                                
-  collumns:                                                                                                                                                                                                    
+- Name: Potion                                                                                                                                                                                               
+  Collumns:                                                                                                                                                                                                    
   - Name                                                                                                                                                                                                       
   - Price
-sells:
+Sells:
 - all

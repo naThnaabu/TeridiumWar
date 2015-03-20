@@ -1,6 +1,6 @@
 ﻿!TeridiumRPG.Item,%20Teridium%20War,%20Version=1.0.0.0,%20Culture=neutral,%20PublicKeyToken=null
 Name: Cheap Sword
-Category: Swords
+Category: Sword
 Price: 10
 InvCanHave: 1
 AttackValue: 3

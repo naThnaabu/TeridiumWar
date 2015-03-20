@@ -89,7 +89,6 @@
     <Compile Include="Characters\Character.cs" />
     <Compile Include="Spells\Fireball.cs" />
     <Compile Include="Spells\Heal_little.cs" />
-    <Compile Include="Characters\Hero\Hero.cs" />
     <Compile Include="Spells\Icebolt.cs" />
     <Compile Include="Items\Item.cs" />
     <Compile Include="MainGame\MainGame.cs" />
@@ -101,8 +100,10 @@
     <Compile Include="Game\Game.cs" />
     <Compile Include="Items\ItemTypes.cs" />
     <Compile Include="Game\Output.cs" />
-    <Compile Include="Shop\ShopCategories.cs" />
-    <Compile Include="Shop\Shop.cs" />
+    <Compile Include="Buildings\Shop.cs" />
+    <Compile Include="Characters\Hero.cs" />
+    <Compile Include="Shops\ShopCategories.cs" />
+    <Compile Include="Buildings\Building.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Pictures\rpg_icon_1.ico" />
@@ -301,7 +302,24 @@
     <None Include="GameData\Shops\default\legs.txt" />
     <None Include="GameData\Shops\default\helmets.txt" />
     <None Include="GameData\Shops\default\chests.txt" />
+    <None Include="ItemData\Arm guard of Might\info.yml" />
+    <None Include="ItemData\Arm guard of the King\info.yml" />
+    <None Include="ItemData\Arm guard of the truth\info.yml" />
     <None Include="ItemData\Cheap Sword\info.yml" />
+    <None Include="ItemData\Chest of Might\info.yml" />
+    <None Include="ItemData\Chest of the King\info.yml" />
+    <None Include="ItemData\Chest of the truth\info.yml" />
+    <None Include="ItemData\Helmet of Might\info.yml" />
+    <None Include="ItemData\Helmet of the King\info.yml" />
+    <None Include="ItemData\Helmet of the truth\info.yml" />
+    <None Include="ItemData\Shoes of Might\info.yml" />
+    <None Include="ItemData\Shoes of the King\info.yml" />
+    <None Include="ItemData\Shoes of the truth\info.yml" />
+    <None Include="ItemData\Trousers of Might\info.yml" />
+    <None Include="ItemData\Trousers of the King\info.yml" />
+    <None Include="ItemData\Trousers of the truth\info.yml" />
+    <None Include="GameData\Taverns\default\info.yml" />
+    <None Include="GameData\Taverns\default\banner.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -313,12 +331,13 @@
   -->
   <ItemGroup>
     <Folder Include="Game\" />
-    <Folder Include="ItemData\" />
     <Folder Include="CharacterData\" />
     <Folder Include="GameData\" />
     <Folder Include="GameData\Shops\" />
     <Folder Include="GameData\Shops\default\" />
-    <Folder Include="Shop\" />
-    <Folder Include="ItemData\Cheap Sword\" />
+    <Folder Include="Shops\" />
+    <Folder Include="ItemData\" />
+    <Folder Include="GameData\Taverns\" />
+    <Folder Include="GameData\Taverns\default\" />
   </ItemGroup>
 </Project>

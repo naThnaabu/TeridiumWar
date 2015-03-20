@@ -1,183 +1,83 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using TeridiumRPG.Characters;
 
-namespace TeridiumRPG
+namespace TeridiumRPG.Buildings
 {
-    class Tavern
+    public class Tavern : Building
     {
-        public Tavern(Hero hero)
+        public const string BuildingType = "Taverns";
+
+        public const ConsoleColor Color = ConsoleColor.Magenta;
+
+        public int RestRestoreHP { get; set; }
+
+        public int RestRestoreMP { get; set; }
+
+        public int RestCost{ get; set; }
+
+        public int FeastRestoreHP{ get; set; }
+
+        public int FeastRestoreMP{ get; set; }
+
+        public int FeastCost{ get; set; }
+
+        public Tavern()
         {
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            string tavernchoice = "";
-            string tavernanswer = "";
-            ConsoleKeyInfo tavernanswerKey;
-            do
-            {
-                tavernchoice = PrintTavernChoice(hero);
-                ProcessTavernChoice(tavernchoice, hero);
-                Console.WriteLine("Are you finished with your business here?\n(Y)es\n(N)o\n");
-                tavernanswerKey = Console.ReadKey(true);
-                tavernanswer = tavernanswerKey.KeyChar.ToString();
-            }
-            while (tavernanswer == "n" || tavernanswer == "N");
-            Console.ForegroundColor = ConsoleColor.Gray;
+
         }
 
-        #region Tavern Process
-        public static string PrintTavernChoice(Hero hero)
+        public override void Load()
         {
-            Console.Clear();
-            ConsoleKeyInfo tavernchoiceKey;
-            Console.Write(@"Welcome to the Iron Pony {0}.
-              
-             .::::.            
-         @\\/W\/\/W\//@         
-          \\/^\/\/^\//         
-      ____________________ 
-     |                   |    
-     |   |V\_   __       |     
-     |   )  o`-(..)      |     
-     |   >L  (_\__/      |     
-     |   / \ \  ___      |     
-     |   /  ( \//(n)     |     
-     |     | //\\        |     
-     |   /(  /   )(n)    |    
-     |    /\(   /        |    
-     :     /`) /\        :
-      \<>    // \\_   <>/      
-       \<>  (_)  (_) <>/      
-        \<>         <>/        
-        `\<>       <>/'         
-           `-......-`", hero.Identifier);
-            Console.WriteLine("\n\n");
-            Console.Write(@"What would you like to do?                                
-*************************************
-                   Price   HP Restore
-(R)est               4        1/4  
-(D)rink and Eat      2        1/8  
-(E)xit
-
-Your HP: {1}/{2}
-YOur MP: {3}/{4}
-Your Gold: {0}
-***********************************", hero.Gold, hero.CurrentHealth, hero.MaxHealth, hero.CurrentMagic, hero.MaxMagic);
-            Console.WriteLine();
-            tavernchoiceKey = Console.ReadKey(true);
-            string tavernchoice = tavernchoiceKey.KeyChar.ToString();
-            return tavernchoice;
+            base.Load();
+            Menuoptions.AddRange(new string[]{ "Rest", "Feast", "Exit" });
         }
 
-        public void ProcessTavernChoice(string tavernchoice, Hero hero)
+        public override string Render()
         {
-            switch (tavernchoice)
-            {
-                case "R":
-                case "r":
-                    TavernRestore(hero, 4, 4, "rested");
-                    break;
-
-                case "D":
-                case "d":
-                    TavernRestore(hero, 8, 2, "drink");
-                    break;
-
-                case "E":
-                case "e":
-                    Console.WriteLine("Exit");
-                    return;
-
-                default:
-                    Console.WriteLine("\nI'm sorry that wasn't a valid choice.\n");
-                    tavernchoice = PrintTavernChoice(hero);
-                    ProcessTavernChoice(tavernchoice, hero);
-                    break;
-            }
-        }
-        #endregion
-
-        #region functions
-        public bool CheckHeroGold(int Gold, Hero hero)
-        {
-            bool HeroGold = false;
-
-            if (hero.Gold >= Gold)
-            {
-                HeroGold = true;
-            }
-            return HeroGold;
+            Console.ForegroundColor = Color;
+            string prepictext = String.Format("Welcome to the {0} {1}", Name, Hero.Identifier);
+            string postoptiontext = String.Format("Your HP: {1}/{2}\nYour MP: {3}/{4}\nYour Gold: {0}", Hero.Gold, Hero.CurrentHealth, Hero.MaxHealth, Hero.CurrentMagic, Hero.MaxMagic);
+            int choice = GameOutput.PrintMenu(Menuoptions.ToArray(), Header, Footer, Picture, posttext, "", prepictext, postoptiontext);
+            return choice == 255 ? "Invalid" : Menuoptions.ToArray()[choice];
         }
 
-        public void TavernRestore(Hero hero, int zahl, int gold, string choice)
+        public Hero Rest(Hero hero)
         {
-            bool HeroGold = CheckHeroGold(gold, hero);
-            if (HeroGold == true)
+
+            return Restore(hero, RestRestoreHP, RestRestoreMP, RestCost, "Rest");
+        }
+
+        public Hero Feast(Hero hero)
+        {
+            return Restore(hero, FeastRestoreHP, FeastRestoreMP, FeastCost, "Feast");
+        }
+
+        private Hero Restore(Hero hero, int restoreHP, int restoreMP, int cost, string action)
+        {
+            if (hero.Gold >= cost)
             {
-                hero.Gold -= gold;
-                int restorHP;
-                int restorMP;
-                int heroMaxHP = hero.MaxHealth;
-                int heroMaxMP = hero.MaxMagic;
-                restorHP = heroMaxHP / zahl;
-                restorMP = heroMaxMP / zahl;
-                int newHP = hero.CurrentHealth + restorHP;
-                int newMP = hero.CurrentMagic + restorMP;
-                if (newHP <= heroMaxHP)
+                bool ismaxMP = hero.CurrentMagic == hero.MaxMagic;
+                bool ismaxHP = hero.CurrentHealth == hero.MaxHealth;
+                hero.Gold -= cost;
+                int realrestoreHP = hero.MaxHealth / restoreHP;
+                int realrestoreMP = hero.MaxMagic / restoreMP;
+                posttext = String.Format("You {0} in the {1}. You feel good about that.\n", action, Name);
+                if (!ismaxHP)
                 {
-                    hero.CurrentHealth += restorHP;
-                    if (choice == "rested")
-                    {
-                        Console.WriteLine("You have rested for a few hours and restored {0} HP. You have now {1} HP", restorHP, hero.CurrentHealth);
-                    }
-                    else
-                    {
-                        Console.WriteLine("You have eaten a delicious Meal and restored {0} HP. You have now {1} HP", restorHP, hero.CurrentHealth);
-                    }
+                    hero.CurrentHealth += realrestoreHP;
+                    posttext += String.Format("You regain {0} HP\n", realrestoreHP);
                 }
-                else
+                if (!ismaxMP)
                 {
-                    hero.CurrentHealth = hero.MaxHealth;
-                    if (choice == "rested")
-                    {
-                        Console.WriteLine("You have rested for a few hours and have fully recovered your HP.");
-                    }
-                    else
-                    {
-
-                        Console.WriteLine("You have eaten a delicious Meal and have fully restored your HP.");
-                    }
-                }
-                if (newMP <= heroMaxMP)
-                {
-                    hero.CurrentMagic += restorMP;
-                    if (choice == "rested")
-                    {
-                        Console.WriteLine("You have rested for a few hours and restored {0} MP. You have now {1} MP\n", restorMP, hero.CurrentMagic);
-                    }
-                    else
-                    {
-                        Console.WriteLine("You have have eaten a delicious Meal and restored {0} MP. You have now {1} MP\n", restorMP, hero.CurrentMagic);
-                    }
-                }
-                else
-                {
-                    hero.CurrentMagic = hero.MaxMagic;
-                    if (choice == "rested")
-                    {
-                        Console.WriteLine("You have rested for a few hours and have fully recovered you MP.\n");
-                    }
-                    else
-                    {
-                        Console.WriteLine("You have eaten a delicious Meal and have fully restored your MP.");
-                    }
+                    hero.CurrentMagic += realrestoreMP;
+                    posttext += String.Format("You regain {0} MP\n", realrestoreMP);
                 }
             }
             else
             {
-                Console.WriteLine("You have not enough Gold to do that.\n");
+                posttext = String.Format("You have not enough Gold to do that.\n");
             }
+            return hero;
         }
-        #endregion
     }
 }

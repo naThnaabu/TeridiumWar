@@ -1,0 +1,8 @@
+﻿Name: default
+Description: Default Tavern to test the Game
+RestRestoreHP: 4
+RestRestoreMP: 4
+RestCost: 4
+FeastRestoreHP: 6
+FeastRestoreMP: 6
+FeastCost: 6

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using YamlDotNet.Serialization;
+using TeridiumRPG.Characters;
+using TeridiumRPG.Items;
+using TeridiumRPG.Buildings;
 
 namespace TeridiumRPG
 {
@@ -13,103 +16,124 @@ namespace TeridiumRPG
         public static string GameData;
         static Deserializer Deserializer;
 
-        static Game ()
+        static Game()
         {
-            Deserializer = new Deserializer ();
-            PlayerDataDir = Environment.GetEnvironmentVariable ("HOME") + "/.teridiumwar/PlayerData";
-            CharacterDataRoot = Environment.GetEnvironmentVariable ("HOME") + "/.teridiumwar/CharacterData";
-            ItemDataRoot = Environment.GetEnvironmentVariable ("HOME") + "/.teridiumwar/ItemData";
-            GameData = Environment.GetEnvironmentVariable ("HOME") + "/.teridiumwar/GameData";
-            if (!Directory.Exists (PlayerDataDir))
-                Directory.CreateDirectory (PlayerDataDir);
+            Deserializer = new Deserializer();
+            PlayerDataDir = Environment.GetEnvironmentVariable("HOME") + "/.teridiumwar/PlayerData";
+            CharacterDataRoot = Environment.GetEnvironmentVariable("HOME") + "/.teridiumwar/CharacterData";
+            ItemDataRoot = Environment.GetEnvironmentVariable("HOME") + "/.teridiumwar/ItemData";
+            GameData = Environment.GetEnvironmentVariable("HOME") + "/.teridiumwar/GameData";
+            if (!Directory.Exists(PlayerDataDir))
+                Directory.CreateDirectory(PlayerDataDir);
         }
 
-        static bool Save (string filename, object obj)
+        static bool Save(string filename, object obj)
         {
-            Serializer Serializer = new Serializer (SerializationOptions.Roundtrip);
+            Serializer Serializer = new Serializer(SerializationOptions.Roundtrip);
             string tmpfilename = filename + ".tmp";
-            try {
-                if (File.Exists (tmpfilename))
-                    File.Delete (tmpfilename);
-                TextWriter writer = File.CreateText (tmpfilename);
-                Serializer.Serialize (writer, obj);
-                writer.Close ();
-                File.Delete (filename);
-                File.Move (tmpfilename, filename);
+            try
+            {
+                if (File.Exists(tmpfilename))
+                    File.Delete(tmpfilename);
+                TextWriter writer = File.CreateText(tmpfilename);
+                Serializer.Serialize(writer, obj);
+                writer.Close();
+                File.Delete(filename);
+                File.Move(tmpfilename, filename);
                 return true;
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 return false;
-            } finally {
-                if (File.Exists (tmpfilename))
-                    File.Delete (tmpfilename);
+            }
+            finally
+            {
+                if (File.Exists(tmpfilename))
+                    File.Delete(tmpfilename);
             }
         }
 
-        public static bool SaveHero (Hero hero)
+        public static bool SaveHero(Hero hero)
         {
-            return Save (PlayerDataDir + "/" + hero.Identifier + ".yml", hero);
+            return Save(PlayerDataDir + "/" + hero.Identifier + ".yml", hero);
         }
 
-        public static Hero LoadHero (string name)
+        public static Hero LoadHero(string name)
         {
-            return Deserializer.Deserialize<Hero> (File.OpenText (PlayerDataDir + "/" + name + ".yml"));
+            return Deserializer.Deserialize<Hero>(File.OpenText(PlayerDataDir + "/" + name + ".yml"));
         }
 
-        public static Array ListHeros ()
+        public static Array ListHeros()
         {
-            List<string> retval = new List<string> ();
-            var files = Directory.GetFiles (PlayerDataDir);
-            foreach (string filename in files) {
-                FileInfo fileinfo = new FileInfo (filename);
-                var heroname = fileinfo.Name.Substring (0, fileinfo.Name.IndexOf ("."));
+            List<string> retval = new List<string>();
+            var files = Directory.GetFiles(PlayerDataDir);
+            foreach (string filename in files)
+            {
+                FileInfo fileinfo = new FileInfo(filename);
+                var heroname = fileinfo.Name.Substring(0, fileinfo.Name.IndexOf("."));
                 if (heroname != "")
-                    retval.Add (heroname);
+                    retval.Add(heroname);
             }
-            return retval.ToArray ();
+            return retval.ToArray();
         }
 
-        public static Character LoadCharacter (string name)
+        public static Character LoadCharacter(string name)
         {
-            Character character = Deserializer.Deserialize<Character> (File.OpenText (CharacterDataRoot + "/" + name + "/info.yml"));
+            Character character = Deserializer.Deserialize<Character>(File.OpenText(CharacterDataRoot + "/" + name + "/info.yml"));
             if (character.Print != null)
-                character.Print = File.OpenText (CharacterDataRoot + "/" + name + "/" + character.Print).ReadToEnd ();
+                character.Print = File.OpenText(CharacterDataRoot + "/" + name + "/" + character.Print).ReadToEnd();
             return character;
         }
 
-        public static Character[] LoadAllCharacters ()
+        public static Character[] LoadAllCharacters()
         {
-            List<Character> chars = new List<Character> ();
-            foreach (string dir in Directory.GetDirectories(CharacterDataRoot)) {
-                DirectoryInfo dirinfo = new DirectoryInfo (dir);
-                chars.Add (LoadCharacter (dirinfo.Name));
+            List<Character> chars = new List<Character>();
+            foreach (string dir in Directory.GetDirectories(CharacterDataRoot))
+            {
+                DirectoryInfo dirinfo = new DirectoryInfo(dir);
+                chars.Add(LoadCharacter(dirinfo.Name));
             }
-            return chars.ToArray ();
+            return chars.ToArray();
         }
 
-        public static Item LoadItem (string name)
+        public static Item LoadItem(string name)
         {
-            return Deserializer.Deserialize<Item> (File.OpenText (ItemDataRoot + "/" + name + "/info.yml"));
+            return Deserializer.Deserialize<Item>(File.OpenText(ItemDataRoot + "/" + name + "/info.yml"));
         }
 
-        public static Item[] LoadAllItems ()
+        public static bool SaveItem(Item item)
         {
-            List<Item> items = new List<Item> ();
-            foreach (string dir in Directory.GetDirectories(ItemDataRoot)) {
-                DirectoryInfo dirinfo = new DirectoryInfo (dir);
-                items.Add (LoadItem (dirinfo.Name));
+            string itemdir = ItemDataRoot + "/" + item.Name;
+            if (!Directory.Exists(itemdir))
+                Directory.CreateDirectory(itemdir);
+            return Save(itemdir + "/info.yml", item);
+        }
+
+        public static Item[] LoadAllItems()
+        {
+            List<Item> items = new List<Item>();
+            foreach (string dir in Directory.GetDirectories(ItemDataRoot))
+            {
+                DirectoryInfo dirinfo = new DirectoryInfo(dir);
+                items.Add(LoadItem(dirinfo.Name));
             }
-            return items.ToArray ();
+            return items.ToArray();
         }
 
-        public static TeridiumRPG.Shop.Shop LoadShop (string name)
+        public static Shop LoadShop(string name)
         {
-            return Deserializer.Deserialize<TeridiumRPG.Shop.Shop> (File.OpenText (GameData + "/Shops/" + name + "/info.yml"));
+            return Deserializer.Deserialize<Shop>(File.OpenText(GameData + "/Shops/" + name + "/info.yml"));
         }
 
-        public static void PrintObj (object obj)
+        public static Tavern LoadTavern(string name)
         {
-            Serializer Serializer = new Serializer (SerializationOptions.Roundtrip);
-            Serializer.Serialize (Console.Out, obj);
+            return Deserializer.Deserialize<Tavern>(File.OpenText(GameData + "/Taverns/" + name + "/info.yml"));
+        }
+
+        public static void PrintObj(object obj)
+        {
+            Serializer Serializer = new Serializer(SerializationOptions.Roundtrip);
+            Serializer.Serialize(Console.Out, obj);
         }
     }
 }

@@ -1,222 +1,156 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
 
 namespace TeridiumRPG
 {
     class MainGame
     {
-		Shop shop;
-		Hero myhero;
-		Tavern tavern;
-		Battle battle;
+        TeridiumRPG.Shop.Shop shop;
+        Hero myhero;
+        Tavern tavern;
+        Battle battle;
+        List<Character> MonsterList;
+        const string stars = "********************************";
+        string posttext;
+        bool playGame;
+        string[] mainmenu;
 
-        public MainGame()
+        public MainGame ()
         {
-			string[] line = new string[] { "Shoes of Might;3", "Shoes of the King;6", "Shoes of the truth;7", "Trousers of Might;3", "Trousers of the King;6", "Trousers of the truth;7", "Chest of Might;3", "Chest of the King;6", "Chest of the truth;7", "Arm guard of Might;3", "Arm guard of the King;6", "Arm guard of the truth;7", "Helmet of Might;3", "Helmet of the King;6", "Helmet of the truth;7" };
-            bool banotherround;
+            shop = Game.LoadShop ("default");
+            MonsterList = new List<Character> (Game.LoadAllCharacters ());
+            posttext = "";
+            playGame = true;
+            mainmenu = new string[] {
+                "Open Player Stats",
+                "Inventory",
+                "Visit the Shop",
+                "Go to the Tavern",
+                "Fight against a Monster",
+                "Save Game",
+                "Exit the Game",
+            };
+        }
 
-            OperatingSystem os = Environment.OSVersion;
-            PlatformID pid = os.Platform;
-            switch (pid)
-            {
-                case PlatformID.Win32NT:
-                case PlatformID.Win32S:
-                case PlatformID.Win32Windows:
-                case PlatformID.WinCE:
-                    Console.SetWindowSize(78, 45);
-                    Console.SetBufferSize(78, 45);
-                    Console.Title = "Teridium RPG";
-                    break;
-                case PlatformID.Unix:
-                    break;
-                default:
-                    break;
+        public int Play ()
+        {
+
+            string[] line = new string[] {
+                "Shoes of Might;3",
+                "Shoes of the King;6",
+                "Shoes of the truth;7",
+                "Trousers of Might;3",
+                "Trousers of the King;6",
+                "Trousers of the truth;7",
+                "Chest of Might;3",
+                "Chest of the King;6",
+                "Chest of the truth;7",
+                "Arm guard of Might;3",
+                "Arm guard of the King;6",
+                "Arm guard of the truth;7",
+                "Helmet of Might;3",
+                "Helmet of the King;6",
+                "Helmet of the truth;7"
+            };
+
+            //Loading of Hero and selection
+            var heroes = Game.ListHeros ();
+            if (heroes.Length < 1) {
+                myhero = new Hero ();
+                Console.WriteLine ("Whats you name?");
+                myhero.Identifier = Console.ReadLine ();
+                myhero.Initialize ();
+                Game.SaveHero (myhero);
+            } else if (heroes.Length == 1) {
+                myhero = Game.LoadHero ((string)heroes.GetValue (0));
+            } else {
+                Console.Write ("Which character would you like to play?\n**************************************\n");
+                for (int x = 0; x < heroes.Length; x++) {
+                    int y = x + 1;
+                    Console.WriteLine ("(" + y + ") " + (string)heroes.GetValue (x));
+                }
+                Console.WriteLine ("(N)ew Character?");
+                Console.WriteLine ("**************************************");
+                ConsoleKeyInfo CharKey;
+                CharKey = Console.ReadKey (true);
+                string sCharKey;
+                sCharKey = CharKey.KeyChar.ToString ();
+                if (sCharKey != "N" & sCharKey != "n") {
+                    int iCharKey = Convert.ToInt32 (sCharKey);
+                    iCharKey--;
+                    myhero = Game.LoadHero ((string)heroes.GetValue (iCharKey));
+                } else {
+                    myhero = new Hero ();
+                    Console.WriteLine ("Whats you name?");
+                    myhero.Identifier = Console.ReadLine ();
+                    myhero.Initialize ();
+                    Game.SaveHero (myhero);
+                }
             }
 
-			List<Character> MonsterList = new List<Character>(Game.LoadAllCharacters());
+            //Print Start Banner
+            RPGStart ();
 
+            //Main Game Loop
+            while (playGame == true) {
+                Random rnd = new Random ();
+                var ChoosenMonster = MonsterList [rnd.Next (MonsterList.Count)];
+                int choice = GameOutput.printMenu (mainmenu, stars, stars, "", posttext);
+                switch (choice) {
+                    case 0:
+                        myhero.PrintHeroStatus ();
+                        Console.ReadKey ();
+                        playGame = true;
+                        break;
 
-			var heroes = Game.ListHeros();
-			if(heroes.Length < 1 ){
-				myhero = new Hero();
-				Console.WriteLine("Whats you name?");
-				myhero.Identifier = Console.ReadLine();
-				myhero.Initialize();
-				Game.SaveHero(myhero);
-			} else if(heroes.Length == 1){
-				myhero = Game.LoadHero((string)heroes.GetValue(0));
-			} else {
-				Console.Write("Which character would you like to play?\n**************************************\n");
-				for (int x = 0; x < heroes.Length; x++)
-				{
-					int y = x+1;
-					Console.WriteLine("(" + y + ") " + (string)heroes.GetValue(x));
-				}
-				Console.WriteLine("(N)ew Character?");
-				Console.WriteLine("**************************************");
-				ConsoleKeyInfo CharKey;
-				CharKey = Console.ReadKey(true);
-				string sCharKey;
-				sCharKey = CharKey.KeyChar.ToString();
-				if (sCharKey != "N" & sCharKey != "n")
-				{
-					int iCharKey = Convert.ToInt32(sCharKey);
-					iCharKey--;
-					myhero = Game.LoadHero((string)heroes.GetValue(iCharKey));
-				}
-				else
-				{
-					myhero = new Hero();
-					Console.WriteLine("Whats you name?");
-					myhero.Identifier = Console.ReadLine();
-					myhero.Initialize();
-					Game.SaveHero(myhero);
-				}
-			}
+                    case 1:
+                        playGame = true;
+                        PrintInventory (myhero);
+                        break;
 
-            if (myhero.CurrentHealth <= 0)
-            {
-                myhero.CurrentHealth = myhero.MaxHealth;
+                    case 2:
+                        myhero = shop.Visit (myhero);
+                        playGame = true;
+                        break;
+
+                    case 3:
+                        battle = new Battle (myhero, ChoosenMonster);
+                        playGame = true;
+                        break;
+
+                    case 4:
+                        tavern = new Tavern (myhero);
+                        playGame = true;
+                        break;
+
+                    case 5:
+                        Game.SaveHero (myhero);
+                        posttext = "Hero Saved";
+                        playGame = true;
+                        break;
+
+                    case 6:
+                        playGame = false;
+                        Console.WriteLine ("Good Bye");
+                        break;
+
+                    default:
+                        posttext = "I'm sorry that wasn't a valid choice.";
+                        break;
+                }
+                Game.SaveHero (myhero);
             }
-
-            RPGStart();
-            do
-            {
-                Random rnd = new Random();
-                var ChoosenMonster = MonsterList[rnd.Next(MonsterList.Count)];
-                banotherround = Decide(ChoosenMonster, myhero);
-            }
-            while (banotherround == true);
+            return 0;
         }
 
         #region functions
-        void BasicGameLoop(Character monster, Hero hero)
-        {
-
-            battle = new Battle(myhero, monster); //copy of Battle called
-        }
-
-        #region Display Player choice
-        bool Decide(Character monster, Hero hero)
-        {
-            bool banotherround = true;
-            System.Threading.Thread.Sleep(500);
-            Console.Clear();
-            Console.Write(@"Please choose what you want to do:
-**********************************
-(O)pen Player Stats
-(I)nventory
-(V)isit the Shop
-(G)o to the Tavern
-(F)ight against a Monster
-(S)ave Game
-(E)xit the Game
-**********************************");
-            Console.WriteLine();
-            ConsoleKeyInfo foghtOrShopKey;
-            string figthOrShop = "";
-            foghtOrShopKey = Console.ReadKey(true);
-            figthOrShop = foghtOrShopKey.KeyChar.ToString();
-            switch (figthOrShop)
-            {
-                case "o":
-                case "O":
-                    hero.PrintHeroStatus();
-                    Console.ReadKey();
-                    banotherround = true;
-                    break;
-
-                case "v":
-                case "V":
-                    shop = new Shop(hero);
-                    banotherround = true;
-                    break;
-
-                case "f":
-                case "F":
-                    BasicGameLoop(monster, hero);
-                    banotherround = true;
-                    break;
-
-                case "g":
-                case "G":
-                    tavern = new Tavern(hero);
-                    banotherround = true;
-                    break;
-
-                case "s":
-                case "S":
-					Game.SaveHero(myhero);
-                    banotherround = true;
-                    break;
-
-                case "e":
-                case "E":
-                    banotherround = false;
-
-                    break;
-
-                case "i":
-                case "I":
-                    banotherround = true;
-                    #region Sell from Inventory
-                    Console.Clear();
-                    Console.Write(@"******************************
-(W)eapons
-(A)rmor
-(I)tems
-(E)xit
-******************************
-");
-                    Console.WriteLine();
-                    ConsoleKeyInfo invchoiceKey;
-                    invchoiceKey = Console.ReadKey(true);
-                    string invchoice = invchoiceKey.KeyChar.ToString();
-                    switch (invchoice)
-                    {
-                        case "W":
-                        case "w":
-                            EquipFromInventory(hero, hero.WeaponInventar);
-                            break;
-
-                        case "A":
-                        case "a":
-                            EquipFromInventory(hero, hero.ArmorInventar);
-                            break;
-
-                        case "I":
-                        case "i":
-                            PrintInventory(hero, hero.Inventar);
-                            break;
-
-                        case "E":
-                        case "e":
-                            break;
-
-                        default:
-                            Decide(monster, hero);
-                            break;
-                    }
-                    #endregion
-                    break;
-
-                default:
-                    Console.WriteLine("\nI'm sorry that wasn't a valid choice.\n");
-                    Decide(monster, hero);
-                    break;
-            }
-            return banotherround;
-        }
-        #endregion
 
         #region Startscreen
-        void RPGStart()
+
+        void RPGStart ()
         {
-            Console.Clear();
-            Console.Write(@"
+            Console.Clear ();
+            Console.Write (@"
   _____         _     _ _                   ____  ____   ____ 
  |_   _|__ _ __(_) __| (_)_   _ _ __ ___   |  _ \|  _ \ / ___|
    | |/ _ \ '__| |/ _` | | | | | '_ ` _ \  | |_) | |_) | |  _ 
@@ -232,7 +166,7 @@ namespace TeridiumRPG
    |               Welcome to <<Teridium RPG>>                |
    |                      (T)utorial                          |
    |                      (P)lay                              |       
-   |                   Developed by Tehral                    |
+   |               Developed by Tehral and Toast              |
    |__________________________________________________________|
                    | ./\/\ /            \ /\/\. |
                    |/     V              V     \|
@@ -241,16 +175,15 @@ namespace TeridiumRPG
 		  
 ");
 
-            Console.WriteLine();
+            Console.WriteLine ();
             ConsoleKeyInfo choiceKey;
-            choiceKey = Console.ReadKey(true);
-            string choice = choiceKey.KeyChar.ToString();
-            switch (choice)
-            {
+            choiceKey = Console.ReadKey (true);
+            string choice = choiceKey.KeyChar.ToString ();
+            switch (choice) {
                 case "t":
                 case "T":
-                    Console.Clear();
-                    Console.Write(@"Welcome to the tutorial. 
+                    Console.Clear ();
+                    Console.Write (@"Welcome to the tutorial. 
 Teridium RPG is a textbased RPG. Your Character starts with nearly 
 nothing but during the game you will get stronger and stronger.
 
@@ -276,9 +209,9 @@ After your Attack is finished, the monster can do the same to you ;)
 
 
 Press any key to continue...");
-                    Console.ReadKey();
-                    Console.Clear();
-                    Console.Write(@"Here is a Sample of a fight:
+                    Console.ReadKey ();
+                    Console.Clear ();
+                    Console.Write (@"Here is a Sample of a fight:
 Hero                        Monster
 Attack: 9                   Attack: 12
 Defense: 8                  Defense: 12
@@ -307,10 +240,10 @@ He miss....
 
 
 Press any key to continue...");
-                    Console.ReadKey();
-                    Console.Clear();
+                    Console.ReadKey ();
+                    Console.Clear ();
 
-                    Console.Write(@"Option 2 Spell:
+                    Console.Write (@"Option 2 Spell:
 Hero                        Monster
 HP: 18                      HP: 19
 MP: 30                      MP: 0
@@ -339,10 +272,10 @@ He miss....
 
 
 Press any key to continue...");
-                    Console.ReadKey();
-                    Console.Clear();
+                    Console.ReadKey ();
+                    Console.Clear ();
 
-                    Console.Write(@"Option 3 Potions:
+                    Console.Write (@"Option 3 Potions:
 Which Potion would you like to drink:
 (1)Little HP Potion      
 (2)Middle HP Potion
@@ -357,10 +290,10 @@ He miss....
 
 
 Press any key to continue...");
-                    Console.ReadKey();
-                    Console.Clear();
+                    Console.ReadKey ();
+                    Console.Clear ();
 
-                    Console.Write(@"Damage Dealing you:
+                    Console.Write (@"Damage Dealing you:
 Hero                        Monster
 HP: 18                      HP: 19
 MP: 30                      MP: 0
@@ -380,9 +313,9 @@ Your enemy lost 4 HP and has now 15 left.
 
 
 Press any key to continue...");
-                    Console.ReadKey();
-                    Console.Clear();
-                    Console.Write(@"Damage Dealing enemy:
+                    Console.ReadKey ();
+                    Console.Clear ();
+                    Console.Write (@"Damage Dealing enemy:
 Hero                        Monster
 HP: 18                      HP: 19
 MP: 30                      MP: 0
@@ -400,11 +333,11 @@ Your lost 3 HP and you have now 15 left.
 
 ");
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("Press any key to go back to the game.");
+                    Console.WriteLine ("Press any key to go back to the game.");
                     Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.ReadKey();
-                    Console.Clear();
-                    System.Threading.Thread.Sleep(800);
+                    Console.ReadKey ();
+                    Console.Clear ();
+                    System.Threading.Thread.Sleep (800);
                     break;
 
                 case "P":
@@ -412,169 +345,34 @@ Your lost 3 HP and you have now 15 left.
                     return;
 
                 default:
-                    Console.Clear();
-                    RPGStart();
+                    Console.Clear ();
+                    RPGStart ();
                     break;
             }
         }
+
         #endregion
 
         #region ShowInventory
-        void PrintInventory(Hero hero, List<string> list)
+
+        void PrintInventory (Hero hero)
         {
-            Console.Clear();
-            Console.Write(@"**************************************************************
-Nr.                    Name                 Own       Price
+            Console.Clear ();
+            Console.Write (@"**************************************************************
+Nr.                    Name                 Weight      Price
 --------------------------------------------------------------
 ");
-            int i = 0;
-
-            string[] aHero = list.ToArray();
-            var counts = aHero
-                .GroupBy(w => w)
-                .Select(g => new { Word = g.Key, Count = g.Count() })
-                .ToList();
-            foreach (var p in counts)
-            {
-                string[] output = p.Word.Split(';');
-                Console.Write(@"{0}{1}{2}{3}", i.ToString().PadRight(5, ' '), output[0].PadRight(40, ' '), p.Count.ToString().PadRight(10, ' '), output[1] + "\n");
+            int i = 1;
+            foreach (Item item in hero.Inventory) {
+                Console.WriteLine ("{0}                    {1}                  {2}       {3}", i, item.Name, item.Weight, item.Price);
                 i++;
             }
-            Console.WriteLine("--------------------------------------------------------------");
-            Console.WriteLine("**************************************************************\nPress any key to continue...\n");
-            Console.ReadKey();
+            Console.WriteLine ("--------------------------------------------------------------");
+            Console.WriteLine ("**************************************************************");
+            Console.WriteLine ("Press any key to continue...");
+            Console.ReadKey ();
         }
-        #endregion
 
-        #region equip functions
-        void EquipFromInventory(Hero hero, List<string> list)
-        {
-            Console.Clear();
-            #region PrintHeader
-            if (list == hero.WeaponInventar)
-            {
-                Console.Write(@"Equipped: {0} {1}W6 {2}DMG
-**************************************************************
-Which Item would you like to equip?
-Nr.         Name                 Own           W6       DMG
---------------------------------------------------------------
-", hero.weapon, hero.AnzW6, hero.AttackDamage);
-            }
-            else
-            {
-                Console.Write(@"**************************************************************
-Which Item would you like to equip?
-Nr.         Name                 Own          Armor      Place
---------------------------------------------------------------
-");
-            #endregion
-            }
-            int i = 0;
-
-            #region Write Items
-            string[] aHero = list.ToArray();
-            var counts = aHero
-                .GroupBy(w => w)
-                .Select(g => new { Word = g.Key, Count = g.Count() })
-                .ToList();
-
-            foreach (var p in counts)
-            {
-                string[] output = p.Word.Split(';');
-                Console.Write(@"{0}{1}{2}{3}{4}", i.ToString().PadRight(12, ' '), output[0].PadRight(22, ' '), p.Count.ToString().PadRight(14, ' '), output[2].ToString().PadRight(9, ' '), output[3].ToString() + "\n");
-                i++;
-            }
-            Console.WriteLine("--------------------------------------------------------------\n(E)xit");
-            Console.WriteLine("**************************************************************\n");
-            #endregion
-            ConsoleKeyInfo sellchoiceKey;
-            string sellchoice = "";
-            sellchoiceKey = Console.ReadKey(true);
-            sellchoice = sellchoiceKey.KeyChar.ToString();
-            if (sellchoice == "E" | sellchoice == "e")
-            {
-                return;
-            }
-            int isellchoice = Convert.ToInt32(sellchoice);
-
-            string[] soutput;
-            char[] cdelim = { ';' };
-            string choice = list.ElementAt(isellchoice);
-            soutput = choice.Split(cdelim);
-            Console.Write(@"Are you sure that you want to equip {0}?
-(Y)es
-(N)o
-", soutput[0]);
-            sellchoiceKey = Console.ReadKey(true);
-            sellchoice = sellchoiceKey.KeyChar.ToString();
-            switch (sellchoice)
-            {
-                case "Y":
-                case "y":
-
-                    string name;
-                    int Itemcost = 0;
-
-				foreach (string line in myhero.WeaponInventar)
-                    {
-                        string[] itemline;
-                        itemline = line.Split(';');
-                        name = itemline[0];
-                        if (name == soutput[0])
-                        {
-                            Itemcost = Convert.ToInt32(itemline[1]);
-                        }
-                    }
-
-                    #region Add Item to Inventory and equip Item
-                    if (list == hero.WeaponInventar)
-                    {
-                        list.Add(hero.weapon + ";" + Itemcost + ";" + hero.AnzW6 + ";" + hero.AttackDamage);
-                        hero.weapon = soutput[0];
-                        hero.AnzW6 = int.Parse(soutput[2]);
-                        hero.AttackDamage = int.Parse(soutput[3]);
-                    }
-                    if (soutput[3] == "head")
-                    {
-                        list.Add(hero.helmetname + ";" + Itemcost + ";" + hero.helmet + ";helmet");
-                        hero.helmetname = soutput[0];
-                        hero.helmet = int.Parse(soutput[2]);
-                    }
-                    if (soutput[3] == "chest")
-                    {
-                        list.Add(hero.chestname + ";" + Itemcost + ";" + hero.chest + ";chest");
-                        hero.chestname = soutput[0];
-                        hero.chest = int.Parse(soutput[2]);
-                    }
-                    if (soutput[3] == "leg")
-                    {
-                        list.Add(hero.legname + ";" + Itemcost + ";" + hero.leg + ";leg");
-                        hero.legname = soutput[0];
-                        hero.leg = int.Parse(soutput[2]);
-                    }
-                    if (soutput[3] == "foot")
-                    {
-                        list.Add(hero.shouename + ";" + Itemcost + ";" + hero.shoue + ";foot");
-                        hero.shouename = soutput[0];
-                        hero.shoue = int.Parse(soutput[2]);
-                    }
-                    if (soutput[3] == "arm")
-                    {
-                        list.Add(hero.armname + ";" + Itemcost + ";" + hero.arm + ";foot");
-                        hero.armname = soutput[0];
-                        hero.arm = int.Parse(soutput[2]);
-                    }
-                    #endregion
-                    list.RemoveAt(isellchoice);
-                    Console.WriteLine("Press any key to continue...");
-                    Console.ReadKey();
-                    break;
-
-                default:
-                    EquipFromInventory(hero, list);
-                    break;
-            }
-        }
         #endregion
 
 

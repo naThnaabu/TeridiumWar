@@ -1,4 +1,64 @@
 ﻿name: default
 description: Default Shop to test the Game
+categories:
+- subcategories:
+  - name: Helmets
+    collumns:
+    - Name
+    - ArmorValue
+    - Price
+  - name: Chests
+    collumns:
+    - Name
+    - ArmorValue
+    - Price
+  - name: Legs
+    collumns:
+    - Name
+    - ArmorValue
+    - Price
+  - name: Shoes
+    collumns:
+    - Name
+    - ArmorValue
+    - Price
+  name: Armor
+  collumns:
+  - Name
+  - ArmorValue
+  - Price
+- subcategories:
+  - name: Swords
+    collumns:
+    - Name
+    - AttackValue
+    - DamageValue
+    - AnzW6
+    - Price
+  - name: Maces
+    collumns:
+    - Name                                                                                                                                                                                                     
+    - AttackValue                                                                                                                                                                                              
+    - DamageValue                                                                                                                                                                                              
+    - AnzW6                                                                                                                                                                                                    
+    - Price                                                                                                                                                                                                    
+  - name: Bows                                                                                                                                                                                                 
+    collumns:                                                                                                                                                                                                  
+    - Name                                                                                                                                                                                                     
+    - AttackValue                                                                                                                                                                                              
+    - DamageValue                                                                                                                                                                                              
+    - AnzW6                                                                                                                                                                                                    
+    - Price                                                                                                                                                                                                    
+  name: Weapons                                                                                                                                                                                                
+  collumns:                                                                                                                                                                                                    
+  - Name                                                                                                                                                                                                       
+  - AttackValue                                                                                                                                                                                                
+  - DamageValue                                                                                                                                                                                                
+  - AnzW6                                                                                                                                                                                                      
+  - Price                                                                                                                                                                                                      
+- name: Potions                                                                                                                                                                                                
+  collumns:                                                                                                                                                                                                    
+  - Name                                                                                                                                                                                                       
+  - Price
 sells:
 - all

@@ -37,9 +37,8 @@ namespace TeridiumRPG
             return 255;
         }
 
-        public static int printTable (string[] rows, string[] columns, string decideText = "", string additionalInfo = "", string picture = "", int length = 100)
+        public static int printTable (string[] rows, string[] columns, bool interactive = true, string decideText = "", string additionalInfo = "", string picture = "", int length = 100)
         {
-            Console.Clear ();
             Console.WriteLine (decideText);
             Console.WriteLine ();
             Console.WriteLine (picture);
@@ -54,30 +53,38 @@ namespace TeridiumRPG
             for (int i = 0; i < rows.Length; i++) {
                 int y = i + 1;
                 string row = rows [i];
-                row = "(" + y + ")" + row;
+                if (interactive == true) {
+                    row = "(" + y + ")" + row;
+                }
                 printTableRow (row.Split (seperator, StringSplitOptions.RemoveEmptyEntries), colwidth);
             }
-            Console.WriteLine ("(E)xit");
-            Console.WriteLine ();
+            if (interactive == true) {
+                Console.WriteLine ("(E)xit");
+                Console.WriteLine ();
+            }
             Console.WriteLine (additionalInfo);
             for (int i = 1; i < length; i++) {
                 Console.Write ("*");
             }
             Console.Write ("\n");
-            ConsoleKeyInfo choiceKey = Console.ReadKey (true);
-            string choice = choiceKey.KeyChar.ToString ();
-            if (choice == "E" | choice == "e") {
-                return 255;
-            } else {
-                int ichoice;
-                bool success = int.TryParse (choice, out ichoice);
-                if (success) {
-                    ichoice--;
-                    return ichoice;
-                } else {
+            if (interactive == true) {
+                ConsoleKeyInfo choiceKey = Console.ReadKey (true);
+                string choice = choiceKey.KeyChar.ToString ();
+                if (choice == "E" | choice == "e") {
                     return 255;
-                }
+                } else {
+                    int ichoice;
+                    bool success = int.TryParse (choice, out ichoice);
+                    if (success) {
+                        ichoice--;
+                        return ichoice;
+                    } else {
+                        return 255;
+                    }
 
+                }
+            } else {
+                return 255;
             }
         }
 

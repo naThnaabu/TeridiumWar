@@ -192,7 +192,7 @@ Type in what you want to do:
                     }
                 }
                 if (Fightchoice == "Status") {
-                    hero.PrintHeroStatus ();
+                    hero.PrintCharacterStatus ();
                     potionsprocess = true;
                     round--;
                 }

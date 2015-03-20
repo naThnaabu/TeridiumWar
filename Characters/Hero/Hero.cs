@@ -29,11 +29,20 @@ namespace TeridiumRPG
 
         public List<Item> Inventory { get; set; }
 
+        string[] weaponfields = null;
+
         #endregion
 
         public Hero ()
         {
             Inventory = new List<Item> ();
+            weaponfields = new string[] {
+                "Name",
+                "AttackValue",
+                "DamageValue",
+                "Weight",
+                "AnzW6"
+            };
         }
 
         #region functions
@@ -190,20 +199,6 @@ namespace TeridiumRPG
             }
         }
 
-        public void PrintHeroStatus ()
-        {
-            Console.Clear ();
-            Console.Write (@"
-**************************************
-Name:   {0}Armor:   {6}
-HP:     {1}/{2}Attack:  {7}
-MP:     {3}/{4}Defense:  {8}
-Level:  {5}Gold:    {9}
-**************************************
-
-Press any Key to continue...", Identifier.PadRight (15, ' '), CurrentHealth.ToString ().PadRight (3, ' '), MaxHealth.ToString ().PadRight (11, ' '), CurrentMagic.ToString ().PadRight (3, ' '), MaxMagic.ToString ().PadRight (11, ' '), Level.ToString ().PadRight (15, ' '), ArmorValue (), Attack, Defense, Gold);
-        }
-
         public void EquipItem (Item item, string slot)
         {
             Type thisType = this.GetType ();
@@ -221,6 +216,51 @@ Press any Key to continue...", Identifier.PadRight (15, ' '), CurrentHealth.ToSt
             if (equipedItem.ItemType != ItemTypes.Nothing)
                 this.Inventory.Add (equipedItem);
             property.SetValue (this, new Item (), null);
+        }
+
+        public void PrintCharacterSheet ()
+        {
+            PrintCharacterStatus ();
+            PrintInventory ();
+        }
+
+        public void PrintCharacterStatus ()
+        {
+            Console.Write (@"
+**************************************
+Name:   {0}Armor:   {6}
+HP:     {1}/{2}Attack:  {7}
+MP:     {3}/{4}Defense:  {8}
+Level:  {5}Gold:    {9}
+**************************************", 
+                Identifier.PadRight (15, ' '), 
+                CurrentHealth.ToString ().PadRight (3, ' '), 
+                MaxHealth.ToString ().PadRight (11, ' '), 
+                CurrentMagic.ToString ().PadRight (3, ' '), 
+                MaxMagic.ToString ().PadRight (11, ' '), 
+                Level.ToString ().PadRight (15, ' '), 
+                ArmorValue (), 
+                Attack, 
+                Defense, 
+                Gold
+            );
+            Console.WriteLine ();
+        }
+
+        public void PrintInventory ()
+        {
+            PrintWeapons ();
+            Console.WriteLine ();
+        }
+
+        public void PrintWeapons ()
+        {
+            List<string> weapons = new List<string> ();
+            foreach (Item item in this.Inventory.FindAll((Item delegitem) => delegitem.ItemType == ItemTypes.Weapon)) {
+                weapons.Add (item.ToItemString (weaponfields));
+            }
+            GameOutput.printTable (weapons.ToArray (), weaponfields, false);
+            Console.WriteLine ();
         }
 
         #endregion

@@ -23,10 +23,9 @@ namespace TeridiumRPG
             playGame = true;
             mainmenu = new string[] {
                 "Open Player Stats",
-                "Inventory",
                 "Visit the Shop",
-                "Go to the Tavern",
                 "Fight against a Monster",
+                "Go to the Tavern",
                 "Save Game",
                 "Exit the Game",
             };
@@ -98,39 +97,39 @@ namespace TeridiumRPG
                 int choice = GameOutput.printMenu (mainmenu, stars, stars, "", posttext);
                 switch (choice) {
                     case 0:
-                        myhero.PrintHeroStatus ();
+                        Console.Clear ();
+                        myhero.PrintCharacterSheet ();
                         Console.ReadKey ();
+                        posttext = "";
                         playGame = true;
                         break;
 
                     case 1:
-                        playGame = true;
-                        PrintInventory (myhero);
-                        break;
-
-                    case 2:
                         myhero = shop.Visit (myhero);
                         playGame = true;
                         break;
 
-                    case 3:
+                    case 2:
                         battle = new Battle (myhero, ChoosenMonster);
+                        posttext = "";
+                        playGame = true;
+                        break;
+
+                    case 3:
+                        tavern = new Tavern (myhero);
+                        posttext = "";
                         playGame = true;
                         break;
 
                     case 4:
-                        tavern = new Tavern (myhero);
-                        playGame = true;
-                        break;
-
-                    case 5:
                         Game.SaveHero (myhero);
                         posttext = "Hero Saved";
                         playGame = true;
                         break;
 
-                    case 6:
+                    case 5:
                         playGame = false;
+                        posttext = "";
                         Console.WriteLine ("Good Bye");
                         break;
 

@@ -64,5 +64,18 @@ namespace TeridiumRPG
         public Item ()
         {
         }
+
+        public string ToItemString (string[] fields)
+        {
+            string itemString = "";
+            foreach (string col in fields) {
+                Type itemType = this.GetType ();
+                System.Reflection.PropertyInfo itemproperty = itemType.GetProperty (col);
+                itemString += itemproperty.GetValue (this, null);
+                itemString += ";";
+            }
+            itemString = itemString.Substring (0, itemString.LastIndexOf (";"));
+            return itemString;
+        }
     }
 }

@@ -101,25 +101,16 @@ namespace TeridiumRPG.Shop
         private Hero Buy (Hero hero, ShopCategory category)
         {
             var items = this.Items.FindAll (
-                            delegate(Item item) {
-                    return item.Category == category.name;
-                }
+                            (Item item) => item.Category == category.name
                         );
             List<string> rows = new List<string> ();
             foreach (Item item in items) {
-                string row = "";
-                foreach (string col in category.collumns) {
-                    Type itemType = item.GetType ();
-                    System.Reflection.PropertyInfo itemproperty = itemType.GetProperty (col);
-                    row += itemproperty.GetValue (item, null);
-                    row += ";";
-                }
-                row = row.Substring (0, row.LastIndexOf (";"));
-                rows.Add (row);
+                rows.Add (item.ToItemString (category.collumns));
             }
             string decideText = "Please choose a " + category.name + " to buy:";
             string additionalInfo = "Your Gold: " + hero.Gold;
-            int selection = GameOutput.printTable (rows.ToArray (), category.collumns, decideText, additionalInfo, category.picture);
+            Console.Clear ();
+            int selection = GameOutput.printTable (rows.ToArray (), category.collumns, true, decideText, additionalInfo, category.picture);
             if (selection == 255)
                 return hero;
             Item selecteditem = Items.ToArray () [selection];

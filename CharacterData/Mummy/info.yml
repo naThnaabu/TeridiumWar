@@ -6,5 +6,4 @@ Experience: 44
 AttackDamage: 5
 Identifier: Mummy
 Print: character.txt
-isAlive: true
 Gold: 12

@@ -6,5 +6,4 @@ Experience: 18
 AttackDamage: 4
 Identifier: Spider
 Print: character.txt
-isAlive: true
 Gold: 6

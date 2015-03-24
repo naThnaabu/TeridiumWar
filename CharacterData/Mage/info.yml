@@ -8,5 +8,4 @@ Experience: 63
 AttackDamage: 4
 Identifier: Mage
 Print: character.txt
-isAlive: true
 Gold: 16

@@ -6,5 +6,4 @@ Experience: 15
 AttackDamage: 9
 Identifier: Hyra
 Print: character.txt
-isAlive: true
 Gold: 16

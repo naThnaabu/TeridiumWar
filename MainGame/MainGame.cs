@@ -13,18 +13,20 @@ namespace TeridiumRPG
         Tavern tavern;
         Battle battle;
         List<Character> MonsterList;
-        const string stars = "********************************";
         string posttext;
         bool playGame;
         string[] mainmenu;
+        string newCharOption;
 
         public MainGame()
         {
             shop = Game.LoadShop("default");
             tavern = Game.LoadTavern("default");
             MonsterList = new List<Character>(Game.LoadAllCharacters());
+            battle = new Battle();
             posttext = "";
             playGame = true;
+            newCharOption = "New Character?";
             mainmenu = new string[]
             {
                 "Open Player Stats",
@@ -39,8 +41,11 @@ namespace TeridiumRPG
         public int Play()
         {
             //Loading of Hero and selection
-            var heroes = Game.ListHeros();
-            if (heroes.Length < 1)
+            string[] heroes = Game.ListHeros();
+            var options = new List<string>(heroes);
+            options.Add(newCharOption);
+            var selection = GameOutput.PrintTable(options.ToArray(), new string[]{ "Which character would you like to play?" });
+            if (selection == options.IndexOf(newCharOption))
             {
                 myhero = new Hero();
                 Console.WriteLine("Whats you name?");
@@ -48,49 +53,23 @@ namespace TeridiumRPG
                 myhero.Initialize();
                 Game.SaveHero(myhero);
             }
-            else if (heroes.Length == 1)
+            else if (selection == 255)
             {
-                myhero = Game.LoadHero((string)heroes.GetValue(0));
+                return 255;
             }
             else
             {
-                Console.Write("Which character would you like to play?\n**************************************\n");
-                for (int x = 0; x < heroes.Length; x++)
-                {
-                    int y = x + 1;
-                    Console.WriteLine("(" + y + ") " + (string)heroes.GetValue(x));
-                }
-                Console.WriteLine("(N)ew Character?");
-                Console.WriteLine("**************************************");
-                ConsoleKeyInfo CharKey;
-                CharKey = Console.ReadKey(true);
-                string sCharKey;
-                sCharKey = CharKey.KeyChar.ToString();
-                if (sCharKey != "N" & sCharKey != "n")
-                {
-                    int iCharKey = Convert.ToInt32(sCharKey);
-                    iCharKey--;
-                    myhero = Game.LoadHero((string)heroes.GetValue(iCharKey));
-                }
-                else
-                {
-                    myhero = new Hero();
-                    Console.WriteLine("Whats you name?");
-                    myhero.Identifier = Console.ReadLine();
-                    myhero.Initialize();
-                    Game.SaveHero(myhero);
-                }
+                myhero = Game.LoadHero((string)heroes.GetValue(selection));
             }
 
             //Print Start Banner
-            RPGStart();
+            //RPGStart();
 
             //Main Game Loop
             while (playGame == true)
             {
-                Random rnd = new Random();
-                var ChoosenMonster = MonsterList[rnd.Next(MonsterList.Count)];
-                int choice = GameOutput.PrintMenu(mainmenu, stars, stars, "", posttext);
+                var ChoosenMonster = MonsterList[Game.rand.Next(MonsterList.Count)];
+                int choice = GameOutput.PrintMenu(mainmenu, "", "", "", true, posttext);
                 switch (choice)
                 {
                     case 0:
@@ -107,7 +86,7 @@ namespace TeridiumRPG
                         break;
 
                     case 2:
-                        battle = new Battle(myhero, ChoosenMonster);
+                        battle.Fight(myhero, ChoosenMonster);
                         posttext = "";
                         playGame = true;
                         break;

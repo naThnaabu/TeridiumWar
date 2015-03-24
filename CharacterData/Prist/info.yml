@@ -8,5 +8,4 @@ Experience: 48
 AttackDamage: 3
 Identifier: Prist
 Print: character.txt
-isAlive: true
 Gold: 12

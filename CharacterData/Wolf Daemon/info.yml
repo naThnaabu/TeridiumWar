@@ -6,5 +6,4 @@ Experience: 44
 AttackDamage: 9
 Identifier: Wolf Daemon
 Print: character.txt
-isAlive: true
 Gold: 13

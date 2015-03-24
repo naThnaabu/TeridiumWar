@@ -5,6 +5,9 @@ using YamlDotNet.Serialization;
 using TeridiumRPG.Characters;
 using TeridiumRPG.Items;
 using TeridiumRPG.Buildings;
+using Troschuetz.Random;
+using Troschuetz.Random.Generators;
+using System.Threading;
 
 namespace TeridiumRPG
 {
@@ -15,6 +18,7 @@ namespace TeridiumRPG
         public static string ItemDataRoot;
         public static string GameData;
         static Deserializer Deserializer;
+        public static TRandom<XorShift128Generator> rand;
 
         static Game()
         {
@@ -25,6 +29,7 @@ namespace TeridiumRPG
             GameData = Environment.GetEnvironmentVariable("HOME") + "/.teridiumwar/GameData";
             if (!Directory.Exists(PlayerDataDir))
                 Directory.CreateDirectory(PlayerDataDir);
+            rand = TRandom.New();
         }
 
         static bool Save(string filename, object obj)
@@ -63,7 +68,7 @@ namespace TeridiumRPG
             return Deserializer.Deserialize<Hero>(File.OpenText(PlayerDataDir + "/" + name + ".yml"));
         }
 
-        public static Array ListHeros()
+        public static string[] ListHeros()
         {
             List<string> retval = new List<string>();
             var files = Directory.GetFiles(PlayerDataDir);
@@ -128,6 +133,11 @@ namespace TeridiumRPG
         public static Tavern LoadTavern(string name)
         {
             return Deserializer.Deserialize<Tavern>(File.OpenText(GameData + "/Taverns/" + name + "/info.yml"));
+        }
+
+        public static StreamReader LoadGameAsset(string relativepath)
+        {
+            return File.OpenText(GameData + "/" + relativepath);
         }
 
         public static void PrintObj(object obj)

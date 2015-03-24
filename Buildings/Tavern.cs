@@ -37,7 +37,7 @@ namespace TeridiumRPG.Buildings
             Console.ForegroundColor = Color;
             string prepictext = String.Format("Welcome to the {0} {1}", Name, Hero.Identifier);
             string postoptiontext = String.Format("Your HP: {1}/{2}\nYour MP: {3}/{4}\nYour Gold: {0}", Hero.Gold, Hero.CurrentHealth, Hero.MaxHealth, Hero.CurrentMagic, Hero.MaxMagic);
-            int choice = GameOutput.PrintMenu(Menuoptions.ToArray(), Header, Footer, Picture, posttext, "", prepictext, postoptiontext);
+            int choice = GameOutput.PrintMenu(Menuoptions.ToArray(), Header, Footer, Picture, true, posttext, "", prepictext, postoptiontext);
             return choice == 255 ? "Invalid" : Menuoptions.ToArray()[choice];
         }
 
@@ -56,21 +56,40 @@ namespace TeridiumRPG.Buildings
         {
             if (hero.Gold >= cost)
             {
-                bool ismaxMP = hero.CurrentMagic == hero.MaxMagic;
-                bool ismaxHP = hero.CurrentHealth == hero.MaxHealth;
+                bool ismaxMP = hero.CurrentMagic >= hero.MaxMagic;
+                bool ismaxHP = hero.CurrentHealth >= hero.MaxHealth;
+
                 hero.Gold -= cost;
                 int realrestoreHP = hero.MaxHealth / restoreHP;
                 int realrestoreMP = hero.MaxMagic / restoreMP;
+                bool wouldoverRestoreHP = hero.CurrentHealth + restoreHP >= hero.MaxHealth;
+                bool wouldoverRestoreMP = hero.CurrentMagic + restoreMP >= hero.MaxMagic;
                 posttext = String.Format("You {0} in the {1}. You feel good about that.\n", action, Name);
                 if (!ismaxHP)
                 {
-                    hero.CurrentHealth += realrestoreHP;
-                    posttext += String.Format("You regain {0} HP\n", realrestoreHP);
+                    if (wouldoverRestoreHP)
+                    {
+                        hero.CurrentHealth = hero.MaxHealth;
+                        posttext += "You are now back to full health\n";
+                    }
+                    else
+                    {
+                        hero.CurrentHealth += realrestoreHP;
+                        posttext += String.Format("You regain {0} HP\n", realrestoreHP);
+                    }
                 }
                 if (!ismaxMP)
                 {
-                    hero.CurrentMagic += realrestoreMP;
-                    posttext += String.Format("You regain {0} MP\n", realrestoreMP);
+                    if (wouldoverRestoreMP)
+                    {
+                        hero.CurrentMagic = hero.MaxMagic;
+                        posttext += "Your Magic Points are now fully restored\n";
+                    }
+                    else
+                    {
+                        hero.CurrentMagic += realrestoreMP;
+                        posttext += String.Format("You regain {0} MP\n", realrestoreMP);
+                    }
                 }
             }
             else

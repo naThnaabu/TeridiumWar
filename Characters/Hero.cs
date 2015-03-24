@@ -57,7 +57,6 @@ namespace TeridiumRPG.Characters
             Defense = 8;
             Experience = 0;
             Gold = 25;
-            isAlive = true;
             AttackDamage = 1;
             AnzW6 = 1;
             Weapon = new Item("Sword", ItemTypes.Weapon, 4);

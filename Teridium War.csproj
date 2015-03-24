@@ -77,6 +77,9 @@
     <Reference Include="YamlDotNet">
       <HintPath>packages\YamlDotNet.3.5.1\lib\net35\YamlDotNet.dll</HintPath>
     </Reference>
+    <Reference Include="Troschuetz.Random">
+      <HintPath>packages\Troschuetz.Random.3.2.0\lib\net40-client\Troschuetz.Random.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Battle\Battle.cs" />
@@ -320,6 +323,8 @@
     <None Include="ItemData\Trousers of the truth\info.yml" />
     <None Include="GameData\Taverns\default\info.yml" />
     <None Include="GameData\Taverns\default\banner.txt" />
+    <None Include="GameData\Battle\death.txt" />
+    <None Include="GameData\Battle\victory.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -339,5 +344,6 @@
     <Folder Include="ItemData\" />
     <Folder Include="GameData\Taverns\" />
     <Folder Include="GameData\Taverns\default\" />
+    <Folder Include="GameData\Battle\" />
   </ItemGroup>
 </Project>

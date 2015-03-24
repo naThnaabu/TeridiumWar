@@ -6,5 +6,4 @@ Experience: 30
 AttackDamage: 6
 Identifier: Ork
 Print: character.txt
-isAlive: true
 Gold: 7

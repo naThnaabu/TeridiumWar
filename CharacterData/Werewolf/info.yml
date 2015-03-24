@@ -6,5 +6,4 @@ Experience: 40
 AttackDamage: 9
 Identifier: Werewolf
 Print: character.txt
-isAlive: true
 Gold: 9

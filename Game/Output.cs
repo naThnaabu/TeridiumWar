@@ -6,9 +6,14 @@ namespace TeridiumRPG
 {
     public static class GameOutput
     {
-        public static int PrintMenu(string[] options, string header = "", string footer = "", string picture = "", string posttext = "", string pretext = "", string prepictext = "", string postoptiontext = "")
+        const string stars = "********************************";
+
+        public static int PrintMenu(string[] options, string header = "", string footer = "", string picture = "", bool clear = true, string posttext = "", string pretext = "", string prepictext = "", string postoptiontext = "")
         {
-            Console.Clear();
+            if (clear)
+            {
+                Console.Clear();
+            }
             if (prepictext != "")
             {
                 Console.WriteLine(pretext);
@@ -21,6 +26,10 @@ namespace TeridiumRPG
             if (header != "")
             {
                 Console.WriteLine(header);
+            }
+            else
+            {
+                Console.WriteLine(stars);
             }
             if (pretext != "")
             {
@@ -41,6 +50,10 @@ namespace TeridiumRPG
             if (footer != "")
             {
                 Console.WriteLine(footer);
+            }
+            else
+            {
+                Console.WriteLine(stars);
             }
             if (posttext != "")
             {

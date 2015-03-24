@@ -6,5 +6,4 @@ Experience: 11
 AttackDamage: 2
 Identifier: Wolf
 Print: character.txt
-isAlive: true
 Gold: 3

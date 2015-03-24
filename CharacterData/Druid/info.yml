@@ -7,6 +7,5 @@ Defense: 6
 Experience: 46
 AttackDamage: 3
 Identifier: Druid
-isAlive: true
 Gold: 13
 Print: character.txt

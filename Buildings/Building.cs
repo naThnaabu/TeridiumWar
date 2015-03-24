@@ -74,7 +74,7 @@ namespace TeridiumRPG.Buildings
         public virtual string Render()
         {
             Console.ForegroundColor = Color;
-            int choice = GameOutput.PrintMenu(Menuoptions.ToArray(), Header, Footer, Picture, posttext);
+            int choice = GameOutput.PrintMenu(Menuoptions.ToArray(), Header, Footer, Picture, true, posttext);
             return choice == 255 ? "Invalid" : Menuoptions.ToArray()[choice];
         }
 

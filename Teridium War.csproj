@@ -74,11 +74,11 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="YamlDotNet">
-      <HintPath>packages\YamlDotNet.3.5.1\lib\net35\YamlDotNet.dll</HintPath>
-    </Reference>
     <Reference Include="Troschuetz.Random">
       <HintPath>packages\Troschuetz.Random.3.2.0\lib\net40-client\Troschuetz.Random.dll</HintPath>
+    </Reference>
+    <Reference Include="YamlDotNet">
+      <HintPath>packages\YamlDotNet.3.6.0\lib\net35\YamlDotNet.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

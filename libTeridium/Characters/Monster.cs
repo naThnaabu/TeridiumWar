@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using libTeridium.Items;
 using libTeridium;
 
-namespace libTeridium.Characters;
+namespace libTeridium.Characters
 {
     public class Monster
     {

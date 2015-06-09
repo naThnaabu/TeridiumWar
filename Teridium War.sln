@@ -5,20 +5,56 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teridium War", "Teridium Wa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libTeridium", "libTeridium\libTeridium.csproj", "{17FC6408-5BFC-486B-8E4D-2083B32E52FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameClient", "GameClient\GameClient.csproj", "{D9D3EB3D-1D99-4D22-B820-81526106B359}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarterKitSample", "StarterKitSample\StarterKitSample.csproj", "{61DE177A-FB6E-46A0-8061-9F69BC87A9E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Framework.Linux", "..\MonoGame\MonoGame.Framework\MonoGame.Framework.Linux.csproj", "{35253CE1-C864-4CD3-8249-4D1319748E8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Framework.Net.Linux", "..\MonoGame\MonoGame.Framework\MonoGame.Framework.Net.Linux.csproj", "{1B738549-0449-4504-B978-7BFC347E3F3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lidgren.Network.Linux", "..\MonoGame\ThirdParty\Lidgren.Network\Lidgren.Network.Linux.csproj", "{758CB33D-6EBD-41EA-BB0C-55B1C97A325F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeridiumWarContent", "TeridiumWarContent\TeridiumWarContent.csproj", "{00B7D3BD-53C7-4296-98D2-62040089C17A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00B7D3BD-53C7-4296-98D2-62040089C17A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{00B7D3BD-53C7-4296-98D2-62040089C17A}.Debug|x86.Build.0 = Debug|Any CPU
+		{00B7D3BD-53C7-4296-98D2-62040089C17A}.Release|x86.ActiveCfg = Release|Any CPU
+		{00B7D3BD-53C7-4296-98D2-62040089C17A}.Release|x86.Build.0 = Release|Any CPU
 		{17FC6408-5BFC-486B-8E4D-2083B32E52FE}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{17FC6408-5BFC-486B-8E4D-2083B32E52FE}.Debug|x86.Build.0 = Debug|Any CPU
 		{17FC6408-5BFC-486B-8E4D-2083B32E52FE}.Release|x86.ActiveCfg = Release|Any CPU
 		{17FC6408-5BFC-486B-8E4D-2083B32E52FE}.Release|x86.Build.0 = Release|Any CPU
+		{1B738549-0449-4504-B978-7BFC347E3F3C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1B738549-0449-4504-B978-7BFC347E3F3C}.Debug|x86.Build.0 = Debug|Any CPU
+		{1B738549-0449-4504-B978-7BFC347E3F3C}.Release|x86.ActiveCfg = Release|Any CPU
+		{1B738549-0449-4504-B978-7BFC347E3F3C}.Release|x86.Build.0 = Release|Any CPU
+		{35253CE1-C864-4CD3-8249-4D1319748E8F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{35253CE1-C864-4CD3-8249-4D1319748E8F}.Debug|x86.Build.0 = Debug|Any CPU
+		{35253CE1-C864-4CD3-8249-4D1319748E8F}.Release|x86.ActiveCfg = Release|Any CPU
+		{35253CE1-C864-4CD3-8249-4D1319748E8F}.Release|x86.Build.0 = Release|Any CPU
+		{61DE177A-FB6E-46A0-8061-9F69BC87A9E2}.Debug|x86.ActiveCfg = Debug|x86
+		{61DE177A-FB6E-46A0-8061-9F69BC87A9E2}.Debug|x86.Build.0 = Debug|x86
+		{61DE177A-FB6E-46A0-8061-9F69BC87A9E2}.Release|x86.ActiveCfg = Release|x86
+		{61DE177A-FB6E-46A0-8061-9F69BC87A9E2}.Release|x86.Build.0 = Release|x86
+		{758CB33D-6EBD-41EA-BB0C-55B1C97A325F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{758CB33D-6EBD-41EA-BB0C-55B1C97A325F}.Debug|x86.Build.0 = Debug|Any CPU
+		{758CB33D-6EBD-41EA-BB0C-55B1C97A325F}.Release|x86.ActiveCfg = Release|Any CPU
+		{758CB33D-6EBD-41EA-BB0C-55B1C97A325F}.Release|x86.Build.0 = Release|Any CPU
 		{AFE9567D-863F-4705-998E-8471F76E998C}.Debug|x86.ActiveCfg = Debug|x86
 		{AFE9567D-863F-4705-998E-8471F76E998C}.Debug|x86.Build.0 = Debug|x86
 		{AFE9567D-863F-4705-998E-8471F76E998C}.Release|x86.ActiveCfg = Release|x86
 		{AFE9567D-863F-4705-998E-8471F76E998C}.Release|x86.Build.0 = Release|x86
+		{D9D3EB3D-1D99-4D22-B820-81526106B359}.Debug|x86.ActiveCfg = Debug|x86
+		{D9D3EB3D-1D99-4D22-B820-81526106B359}.Debug|x86.Build.0 = Debug|x86
+		{D9D3EB3D-1D99-4D22-B820-81526106B359}.Release|x86.ActiveCfg = Release|x86
+		{D9D3EB3D-1D99-4D22-B820-81526106B359}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

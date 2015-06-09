@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D9D3EB3D-1D99-4D22-B820-81526106B359}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>GameClient</RootNamespace>
+    <AssemblyName>GameClient</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AudioManager.cs" />
+    <Compile Include="Fonts.cs" />
+    <Compile Include="InputManager.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="RolePlayingGame.cs" />
+    <Compile Include="Combat\ArtificialIntelligence.cs" />
+    <Compile Include="Combat\CombatEndingState.cs" />
+    <Compile Include="Combat\CombatEngine.cs" />
+    <Compile Include="Combat\Combatant.cs" />
+    <Compile Include="Combat\CombatantMonster.cs" />
+    <Compile Include="Combat\CombatantPlayer.cs" />
+    <Compile Include="Combat\Actions\CombatAction.cs" />
+    <Compile Include="Combat\Actions\DefendCombatAction.cs" />
+    <Compile Include="Combat\Actions\ItemCombatAction.cs" />
+    <Compile Include="Combat\Actions\MeleeCombatAction.cs" />
+    <Compile Include="Combat\Actions\SpellCombatAction.cs" />
+    <Compile Include="GameScreens\ChestScreen.cs" />
+    <Compile Include="GameScreens\DialogueScreen.cs" />
+    <Compile Include="GameScreens\EquipmentScreen.cs" />
+    <Compile Include="GameScreens\GameOverScreen.cs" />
+    <Compile Include="GameScreens\GameplayScreen.cs" />
+    <Compile Include="GameScreens\Hud.cs" />
+    <Compile Include="GameScreens\InnScreen.cs" />
+    <Compile Include="GameScreens\InventoryScreen.cs" />
+    <Compile Include="GameScreens\LevelUpScreen.cs" />
+    <Compile Include="GameScreens\ListScreen.cs" />
+    <Compile Include="GameScreens\NpcScreen.cs" />
+    <Compile Include="GameScreens\PlayerNpcScreen.cs" />
+    <Compile Include="GameScreens\PlayerSelectionScreen.cs" />
+    <Compile Include="GameScreens\QuestDetailsScreen.cs" />
+    <Compile Include="GameScreens\QuestLogScreen.cs" />
+    <Compile Include="GameScreens\QuestNpcScreen.cs" />
+    <Compile Include="GameScreens\RewardsScreen.cs" />
+    <Compile Include="GameScreens\SpellbookScreen.cs" />
+    <Compile Include="GameScreens\StatisticsScreen.cs" />
+    <Compile Include="GameScreens\StoreBuyScreen.cs" />
+    <Compile Include="GameScreens\StoreScreen.cs" />
+    <Compile Include="GameScreens\StoreSellScreen.cs" />
+    <Compile Include="MenuScreens\ControlsScreen.cs" />
+    <Compile Include="MenuScreens\HelpScreen.cs" />
+    <Compile Include="MenuScreens\LoadingScreen.cs" />
+    <Compile Include="MenuScreens\MainMenuScreen.cs" />
+    <Compile Include="MenuScreens\MessageBoxScreen.cs" />
+    <Compile Include="MenuScreens\SaveLoadScreen.cs" />
+    <Compile Include="ScreenManager\GameScreen.cs" />
+    <Compile Include="ScreenManager\MenuEntry.cs" />
+    <Compile Include="ScreenManager\MenuScreen.cs" />
+    <Compile Include="ScreenManager\ScreenManager.cs" />
+    <Compile Include="Session\ModifiedChestEntry.cs" />
+    <Compile Include="Session\Party.cs" />
+    <Compile Include="Session\PartySaveData.cs" />
+    <Compile Include="Session\PlayerSaveData.cs" />
+    <Compile Include="Session\SaveGameDescription.cs" />
+    <Compile Include="Session\Session.cs" />
+    <Compile Include="TileEngine\PlayerPosition.cs" />
+    <Compile Include="TileEngine\TileEngine.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Game.ico" />
+    <None Include="GameThumbnail.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Combat\" />
+    <Folder Include="GameScreens\" />
+    <Folder Include="MenuScreens\" />
+    <Folder Include="ScreenManager\" />
+    <Folder Include="Session\" />
+    <Folder Include="TileEngine\" />
+    <Folder Include="Content\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\MonoGame\MonoGame.Framework\MonoGame.Framework.Linux.csproj">
+      <Project>{35253CE1-C864-4CD3-8249-4D1319748E8F}</Project>
+      <Name>MonoGame.Framework.Linux</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MonoGame\MonoGame.Framework\MonoGame.Framework.Net.Linux.csproj">
+      <Project>{1B738549-0449-4504-B978-7BFC347E3F3C}</Project>
+      <Name>MonoGame.Framework.Net.Linux</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TeridiumWarContent\TeridiumWarContent.csproj">
+      <Project>{00B7D3BD-53C7-4296-98D2-62040089C17A}</Project>
+      <Name>TeridiumWarContent</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Content.mgcb" />
+  </ItemGroup>
+</Project>
